@@ -19,6 +19,8 @@ for i in range (0, len(c_mc_4)):
     y = 1/4-c_mc_4.item(i)/c_n.item(i)
     x_cp_c = np.append(x_cp_c, [y])
 
+#print(x_cp_c)
+
 x_new = np.linspace(-2,14,300)
 spl = make_interp_spline(alpha, x_cp_c, k=3)
 y_new = spl(x_new)
@@ -30,4 +32,4 @@ plt.xlabel("\u03B1 (angle of attack) (\u00b0)")
 plt.ylabel("$X_{cp}$/c")
 plt.title('Normalized Center of Pressure v Angle of Attack')
 
-plt.savefig("Problem 1.6.pdf")
+plt.savefig("Problem 1.6.png")
