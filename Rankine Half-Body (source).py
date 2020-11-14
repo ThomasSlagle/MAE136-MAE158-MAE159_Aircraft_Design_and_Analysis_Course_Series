@@ -6,10 +6,10 @@ from matplotlib import pyplot as plt
 n = 200
 
 #Boundary Conditions
-x_i = -4
-x_f = 4
-y_i = -4
-y_f = 4
+x_i = -1
+x_f = 1
+y_i = -1
+y_f = 1
 x = np.linspace(x_i,x_f,n)
 y = np.linspace(y_i,y_f,n)
 X,Y = np.meshgrid(x,y)
@@ -53,22 +53,20 @@ plt.title('Streamlines')
 plt.xlim(x_i,x_f)
 plt.ylim(y_i,y_f)
 plt.streamplot(X,Y,u,v,density=2, linewidth=1, arrowsize=1, arrowstyle='-')
-#plt.scatter(x_source,y_source,color='blue',s=80, marker='o')
 
-#stagpoints
-x_stag = x_source - sourceStrength / (2*np.pi*U_inf)
-y_stag = y_source
-#plt.scatter(x_stag,y_stag, color='g',s=90,marker='o')
 
 plt.contour(X, Y, psi,
                levels=[-sourceStrength / 2, sourceStrength / 2],
                colors='black', linewidths=2, linestyles='solid')
-plt.show()
+plt.savefig("Half Rankine Body")
 plt.close()
 
 #Cp plot
+b = sourceStrength/(2*np.pi*U_inf)
 def c_p (theta):
-    return -2*np.cos(theta)*np.sin(theta/2)**2-np.sin(theta/2)**4
+    r = b*(np.pi-theta)/np.sin(theta)
+    Velocity = np.sqrt(U_inf**2*(1+2*b/r*np.cos(theta) + b**2/r**2))
+    return 1.0 - Velocity**2/U_inf**2
 
 Theta = np.linspace(0,2*np.pi,n)
 count = 0
@@ -81,4 +79,4 @@ plt.plot(Theta,C_p)
 plt.xlabel('$\u03B8_{body}$')
 plt.ylabel('$c_p$')
 plt.title('Body Coefficient of Pressure v Body Angle')
-plt.show()
+plt.savefig("Cp Half Rankine Body")
