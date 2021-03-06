@@ -1,3 +1,4 @@
+###### PART 2 #####
 import numpy as np
 from matplotlib import pyplot as plt
 
@@ -41,78 +42,65 @@ def kappa(M, Lambda, TC):
     return 1 + z*TC + 100*TC**4
 
 #Given Parameters
+C_bat = 130 #Wh/lb
+eta_bat = 180 #W/lb-T
 
-#General Plane Properties
-W_i = 97000 #lbs
-W_d = 82000 #lbs
-C_t = 0.82 #lb/lb-h
-W_ker = 6.7 #lb/gal
+#Basing my design on the Alpha-Electro Plane
+#Many basic dimensions: https://www.pipistrel-aircraft.com/aircraft/flight-training/alpha/#tab-id-2
+#Measurements taken using imageJ
+W_bat = 277 # lbs
+W_gross = 1214 #lb
 
 #Wing Geometry
-Lambda_w = 24.5 #deg
-tc_w = 0.106
-b_w = 93.2 #ft
-S_w = 1000 #ft2
-sigma_w = 0.2
-c_r_w = 17.8 #ft
-S_covered_w = 0.17
+Lambda_w = 0 #deg
+tc_w = 0.1775
+b_w = 34.5 #ft
+S_w = 102.4 #ft2
+sigma_w = 1
+c_r_w = 2.896 #ft
 
 #Vertical Tail
-Lambda_v = 43.5 #deg
-tc_v = 0.09
-S_v = 161 #ft2
-sigma_v = 0.80
-c_r_v = 15.5
+Lambda_v = 0 #deg
+tc_v = 0.10
+S_v = 11.8 #ft2
+sigma_v = 0.654
+c_r_v = 4.109
 
 #Horizontal Tail
-Lambda_h = 31.6 #deg
-tc_h = 0.09
-S_h = 261 #ft2
-sigma_h = 0.35
-c_r_h = 11.1 #ft
+Lambda_h = 0 #deg
+tc_h = 0.10625
+S_h = 11.6 #ft2
+sigma_h = 1
+c_r_h = 2.240 #ft
 
 #Fuselage Geometry
-l = 107 #ft
-dia = 11.5 #ft
-S_wet = 3280 #ft2
+l = 21.4 #ft
+dia = 3.5 #ft
+S_wet = np.pi * dia * (l - 1.3*dia) #ft2 #calculated from https://onlinelibrary.wiley.com/doi/pdf/10.1002/9781118568101.app1
 
-#Pylons Geometry
-S_wet_p = 117 #ft2
-tc_p = 0.06
-Lambda_p = 0 #deg
-sigma_p = 1.0
-c_p = 16.2 #ft
+#Landing Gear
+delta_f_LG = 0.15 #ft2
 
-#Nacelles Geometry
-S_wet_n = 455 #ft2
-fin_ratio = 5.0
-L_n = 16.8 #ft
-
-#Flap hinge Fairing
-delta_f_FH = 0.15 #ft2
 
 #Environmental Variables
-h = 31000 #ft
-#M = 0.78
-T_f = -60 #F
-T = -60 + 459.67
-rho_sl = 0.002377
-rho = 0.000876 #slugs/ft3
-mu = 0.3170*(T**(3/2))*(734.7/(T+216))*(1/10**10) #3.04e-07
-#print(mu)
 gamma = 1.4
 R = 1718
+h = 9000 #ft
+T = 486.61 #R
+rho_sl = 0.002377
+P = 1512.9
+rho = P/(R*T) #slugs/ft3
+mu = 0.3170*(T**(3/2))*(734.7/(T+216))*(1/10**10) #3.04e-07
+
 a = np.sqrt(gamma*R*(T))
 
-#print(a)
-#V_0 = M*a
 
-T_sl = 14500
-T = T_sl*(rho/rho_sl)
+
+
 #print(T)
 
 #Arrays
-V_array_kts = np.linspace(250,575,1000)
+V_array_kts = np.linspace(50,200,1000)
 D_i_array = np.array([])
 D_p_array = np.array([])
 D_tot_array = np.array([])
@@ -137,7 +125,7 @@ for i in range (len(V_array_kts)):
     re_w = Re(Re_l, mac_w)
     cf_w = c_f(re_w)
     kappa_w = kappa(M, Lambda_w, tc_w)
-    delta_f_w = (1.02*2*S_w*(1-S_covered_w)*cf_w*kappa_w)
+    delta_f_w = (1.02*2*S_w*(1-(1.02*2*S_w))*cf_w*kappa_w)
 
     #Horizontal Tail
     mac_h = MAC(c_r_h, sigma_h)
@@ -153,12 +141,6 @@ for i in range (len(V_array_kts)):
     kappa_v = kappa(M, Lambda_v, tc_v)
     delta_f_v = (1.02*2*S_v*cf_v*kappa_v)
 
-    #Pylons
-    re_p = Re(Re_l, c_p)
-    cf_p = c_f(re_p)
-    kappa_p = kappa(M, Lambda_p, tc_p)
-    delta_f_p = (S_wet_p*cf_p*kappa_p)
-
     #Fuselage
     re_f = Re(Re_l, l)
     fin_F = l/dia
@@ -166,55 +148,52 @@ for i in range (len(V_array_kts)):
     cf_f = c_f(re_f)
     delta_f_f = S_wet*cf_f*kappa_f
 
-    #Nacelles
-    re_n = Re(Re_l, L_n)
-    cf_n = c_f(re_n)
-    kappa_n = 1.29
-    delta_f_n = S_wet_n*cf_n*kappa_n
-
     #Total Parasite drag
-    f = 1.10*(delta_f_w + delta_f_f + delta_f_h + delta_f_v + delta_f_n + delta_f_p + delta_f_FH)
+    f = 1.10*(delta_f_w + delta_f_f + delta_f_h + delta_f_v + delta_f_LG)
     C_d_p = f/S_w
+
     AsR = b_w**2/S_w
 
-    C_l = W_i/(q*S_w)
+    C_l = W_gross/(q*S_w)
     #print(C_l)
 
     C_d_i = C_l**2/(np.pi*AsR*e(AsR, C_d_p, Lambda_w))
 
-    D_i = (W_i/b_w)**2/(np.pi*q*e(AsR, C_d_p, Lambda_w))
+    D_i = (W_gross/b_w)**2/(np.pi*q*e(AsR, C_d_p, Lambda_w))
     D_i_array = np.append(D_i_array,[D_i])
     D_p = f*q
     D_p_array = np.append(D_p_array,[D_p])
+
 
     D_tot = D_p + D_i
     C_d = D_tot/(q*S_w)
     D_tot_array = np.append(D_tot_array,[D_tot])
 
-    ld = D_tot/W_i
+    ld = D_tot/W_gross
     ld_array = np.append(ld_array, [ld])
 
-    P_req = (1/550)*np.sqrt(2*W_i**3/(rho_sl*S_w))*1/(C_l**(3/2)/C_d) #D_tot*V/550#
+    P_req = (1/550)*np.sqrt(2*W_gross**3/(rho_sl*S_w))*1/(C_l**(3/2)/C_d) #D_tot*V/550#
     P_req_array = np.append(P_req_array, [P_req])
 
-
-
-    R_jet = 2/C_t * np.sqrt(2/(rho*S_w))*np.sqrt(C_l)/(C_d_p+C_d_i)*(np.sqrt(W_i)-np.sqrt(W_d))
-    R_array = np.append(R_array, [R_jet])
+    R_prop = 325 * eta_bat/C_p*ld*ln(W_gross/W_gross)
+    R_array = np.append(R_array, [R_prop])
 
     E_jet = 1/C_t*(C_l/C_d)*np.log10(W_i/W_d)
     E_array = np.append(E_array, [E_jet])
 
-    P_ava = T*V/550
+    P_ava = P_shaft * eta_bat
     P_ava_array = np.append(P_ava_array, [P_ava])
 
     P_exc_array = np.append(P_exc_array, [(P_ava-P_req)*4])
-    roc = (T_sl/W_i - 1/(C_l/C_d))*V*60
+
+    roc = (P_ava-P_req)*550/W_i
     roc_array = np.append(roc_array,[roc])
 
 print('Your max range is: \n' +  str(np.max(R_array)) + ' miles\nThis value occurs at:\n' + str(V_array_kts[np.argmax(R_array)]) + ' kts\n\n')
 print('Your max endurance is:\n' + str(np.max(E_array)) + ' hr\n' + str(V_array_kts[np.argmax(E_array)]) + ' kts')
 
+
+#PLOTS
 plt.plot(V_array_kts, D_tot_array, label = 'Total Drag')
 plt.plot(V_array_kts, D_i_array, label = 'Induced Drag')
 plt.plot(V_array_kts, D_p_array, label = 'parasitic Drag')
@@ -237,6 +216,6 @@ plt.close()
 
 plt.plot(V_array_kts, roc_array)
 plt.xlabel('Airspeed (Kts)')
-plt.ylabel('Rate of Climb (ft/min)')
+plt.ylabel('Rate of Climb (ft/s)')
 plt.title('Rate of Climb v Airspeed')
 plt.show()
