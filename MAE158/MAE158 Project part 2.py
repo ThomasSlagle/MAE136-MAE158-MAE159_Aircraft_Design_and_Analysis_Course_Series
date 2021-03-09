@@ -26,16 +26,7 @@ def c_f(R):
 #e_lambda_zero Equation (calc from Nabil Discussion)
 def e(Ar, C_d_p, _lambda):
     e_straight = np.abs(1.78*(1 - 0.045*Ar**0.68) - 0.64)
-    e_30 = np.abs(4.61*(1 - 0.045*Ar**0.68)*(np.cos(np.radians(_lambda)))**0.15 - 3.1)
-    e_mid = np.abs((e_30 - e_straight)/(np.radians(_lambda) - 0))
-
-    if (_lambda == 0):
-        return e_straight
-    elif (_lambda >= 30):
-        return e_30
-    else:
-        return e_mid
-    #0.9423 + 0.00041*Ar + 4.591*C_d_p - 6.878e-06*Ar**2 - 1.348*Ar*C_d_p - 242.9 *C_d_p**2 + 0.01989*Ar**2*C_d_p + 11.86*Ar*C_d_p**2 + 3483*C_d_p**3
+    return e_straight
 
 def kappa(M, Lambda, TC):
     z = ((2-M**2)*np.cos(np.radians(Lambda)))/(np.sqrt(1 - M**2*np.cos(np.radians(Lambda))))
@@ -43,13 +34,17 @@ def kappa(M, Lambda, TC):
 
 #Given Parameters
 C_bat = 130 #Wh/lb
-eta_bat = 180 #W/lb-T
+bat = 180 #W/lb-T
+eta_p = 0.86 #https://en.wikipedia.org/wiki/Propulsive_efficiency
 
 #Basing my design on the Alpha-Electro Plane
-#Many basic dimensions: https://www.pipistrel-aircraft.com/aircraft/flight-training/alpha/#tab-id-2
+#Many basic dimensions: https://www.pipistrel-aircraft.com/aircraft/electric-flight/alpha-electro/
 #Measurements taken using imageJ
 W_bat = 277 # lbs
+Wh_bat = W_bat * C_bat #Wh
 W_gross = 1214 #lb
+P_shaft = 50000 #Watts
+
 
 #Wing Geometry
 Lambda_w = 0 #deg
@@ -100,7 +95,7 @@ a = np.sqrt(gamma*R*(T))
 #print(T)
 
 #Arrays
-V_array_kts = np.linspace(50,200,1000)
+V_array_kts = np.linspace(25,200,1000)
 D_i_array = np.array([])
 D_p_array = np.array([])
 D_tot_array = np.array([])
@@ -125,7 +120,8 @@ for i in range (len(V_array_kts)):
     re_w = Re(Re_l, mac_w)
     cf_w = c_f(re_w)
     kappa_w = kappa(M, Lambda_w, tc_w)
-    delta_f_w = (1.02*2*S_w*(1-(1.02*2*S_w))*cf_w*kappa_w)
+    delta_f_w = (1.02*2*S_w*cf_w*kappa_w)
+    #print(delta_f_w)
 
     #Horizontal Tail
     mac_h = MAC(c_r_h, sigma_h)
@@ -172,21 +168,21 @@ for i in range (len(V_array_kts)):
     ld = D_tot/W_gross
     ld_array = np.append(ld_array, [ld])
 
-    P_req = (1/550)*np.sqrt(2*W_gross**3/(rho_sl*S_w))*1/(C_l**(3/2)/C_d) #D_tot*V/550#
+    P_req = np.sqrt(2*W_gross**3/(rho_sl*S_w))*1/(C_l**(3/2)/C_d) #(1/550)*
     P_req_array = np.append(P_req_array, [P_req])
 
-    R_prop = 325 * eta_bat/C_p*ld*ln(W_gross/W_gross)
+    E_prop = Wh_bat/P_req
+    E_array = np.append(E_array, [E_prop])
+
+    R_prop = E_prop * V
     R_array = np.append(R_array, [R_prop])
 
-    E_jet = 1/C_t*(C_l/C_d)*np.log10(W_i/W_d)
-    E_array = np.append(E_array, [E_jet])
-
-    P_ava = P_shaft * eta_bat
+    P_ava = P_shaft * eta_p
     P_ava_array = np.append(P_ava_array, [P_ava])
 
     P_exc_array = np.append(P_exc_array, [(P_ava-P_req)*4])
 
-    roc = (P_ava-P_req)*550/W_i
+    roc = (P_ava-P_req)/W_gross*60
     roc_array = np.append(roc_array,[roc])
 
 print('Your max range is: \n' +  str(np.max(R_array)) + ' miles\nThis value occurs at:\n' + str(V_array_kts[np.argmax(R_array)]) + ' kts\n\n')
@@ -211,11 +207,12 @@ plt.plot(V_array_kts, P_ava_array, label = 'Power Available')
 plt.xlabel('Airspeed (Kts)')
 plt.ylabel('Power (hp)')
 plt.title('Power Required v Airspeed')
+plt.legend()
 plt.show()
 plt.close()
 
 plt.plot(V_array_kts, roc_array)
 plt.xlabel('Airspeed (Kts)')
-plt.ylabel('Rate of Climb (ft/s)')
+plt.ylabel('Rate of Climb (ft/min)')
 plt.title('Rate of Climb v Airspeed')
 plt.show()

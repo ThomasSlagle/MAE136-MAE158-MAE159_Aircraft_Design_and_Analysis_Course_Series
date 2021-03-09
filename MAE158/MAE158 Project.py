@@ -109,7 +109,7 @@ a = np.sqrt(gamma*R*(T))
 
 T_sl = 14500
 T = T_sl*(rho/rho_sl)
-#print(T)
+print(T)
 
 #Arrays
 V_array_kts = np.linspace(250,575,1000)
@@ -209,6 +209,7 @@ for i in range (len(V_array_kts)):
     P_ava_array = np.append(P_ava_array, [P_ava])
 
     P_exc_array = np.append(P_exc_array, [(P_ava-P_req)*4])
+
     roc = (T_sl/W_i - 1/(C_l/C_d))*V*60
     roc_array = np.append(roc_array,[roc])
 
@@ -217,12 +218,12 @@ print('Your max endurance is:\n' + str(np.max(E_array)) + ' hr\n' + str(V_array_
 
 plt.plot(V_array_kts, D_tot_array, label = 'Total Drag')
 plt.plot(V_array_kts, D_i_array, label = 'Induced Drag')
-plt.plot(V_array_kts, D_p_array, label = 'parasitic Drag')
+plt.plot(V_array_kts, D_p_array, label = 'Parasitic Drag')
 plt.xlabel('Airspeed (Kts)')
 plt.ylabel('Drag (lbs)')
 plt.title('Drag v Airspeed')
 plt.legend()
-plt.show()
+#plt.show()
 plt.close()
 
 plt.plot(V_array_kts, P_req_array, label = 'Power Required')
@@ -232,11 +233,12 @@ plt.plot(V_array_kts, P_ava_array, label = 'Power Available')
 plt.xlabel('Airspeed (Kts)')
 plt.ylabel('Power (hp)')
 plt.title('Power Required v Airspeed')
-plt.show()
+plt.legend()
+#plt.show()
 plt.close()
 
 plt.plot(V_array_kts, roc_array)
 plt.xlabel('Airspeed (Kts)')
 plt.ylabel('Rate of Climb (ft/min)')
 plt.title('Rate of Climb v Airspeed')
-plt.show()
+#plt.show()
