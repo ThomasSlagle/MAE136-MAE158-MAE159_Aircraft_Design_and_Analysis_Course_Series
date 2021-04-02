@@ -122,6 +122,7 @@ for i in range (len(V_array_kts)):
     kappa_w = kappa(M, Lambda_w, tc_w)
     delta_f_w = (1.02*2*S_w*cf_w*kappa_w)
     #print(delta_f_w)
+    print(kappa_w)
 
     #Horizontal Tail
     mac_h = MAC(c_r_h, sigma_h)
@@ -146,8 +147,9 @@ for i in range (len(V_array_kts)):
 
     #Total Parasite drag
     f = 1.10*(delta_f_w + delta_f_f + delta_f_h + delta_f_v + delta_f_LG)
-    C_d_p = f/S_w
 
+    C_d_p = f/S_w
+    print(C_d_p)
     AsR = b_w**2/S_w
 
     C_l = W_gross/(q*S_w)
@@ -185,8 +187,9 @@ for i in range (len(V_array_kts)):
     roc = (P_ava-P_req)/W_gross*60
     roc_array = np.append(roc_array,[roc])
 
-print('Your max range is: \n' +  str(np.max(R_array)) + ' miles\nThis value occurs at:\n' + str(V_array_kts[np.argmax(R_array)]) + ' kts\n\n')
-print('Your max endurance is:\n' + str(np.max(E_array)) + ' hr\n' + str(V_array_kts[np.argmax(E_array)]) + ' kts')
+#print('Your max range is: \n' +  str(np.max(R_array)) + ' miles\nThis value occurs at:\n' + str(V_array_kts[np.argmax(R_array)]) + ' kts\n\n')
+#print('Your max endurance is:\n' + str(np.max(E_array)) + ' hr\n' + str(V_array_kts[np.argmax(E_array)]) + ' kts')
+
 
 
 #PLOTS
@@ -197,7 +200,7 @@ plt.xlabel('Airspeed (Kts)')
 plt.ylabel('Drag (lbs)')
 plt.title('Drag v Airspeed')
 plt.legend()
-plt.show()
+#plt.show()
 plt.close()
 
 plt.plot(V_array_kts, P_req_array, label = 'Power Required')
@@ -205,7 +208,7 @@ plt.plot(V_array_kts, P_ava_array, label = 'Power Available')
 #plt.plot(V_array_kts, P_exc_array, label = 'Excess Power')
 #ax2 = plt.secondary_yaxis("right", functions=(V_array_kts, P_exc_array))
 plt.xlabel('Airspeed (Kts)')
-plt.ylabel('Power (hp)')
+plt.ylabel('Power (W)')
 plt.title('Power Required v Airspeed')
 plt.legend()
 plt.show()
@@ -215,4 +218,4 @@ plt.plot(V_array_kts, roc_array)
 plt.xlabel('Airspeed (Kts)')
 plt.ylabel('Rate of Climb (ft/min)')
 plt.title('Rate of Climb v Airspeed')
-plt.show()
+#plt.show()

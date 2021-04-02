@@ -109,7 +109,7 @@ a = np.sqrt(gamma*R*(T))
 
 T_sl = 14500
 T = T_sl*(rho/rho_sl)
-print(T)
+#print(T)
 
 #Arrays
 V_array_kts = np.linspace(250,575,1000)
@@ -174,9 +174,10 @@ for i in range (len(V_array_kts)):
 
     #Total Parasite drag
     f = 1.10*(delta_f_w + delta_f_f + delta_f_h + delta_f_v + delta_f_n + delta_f_p + delta_f_FH)
+
     C_d_p = f/S_w
     AsR = b_w**2/S_w
-
+    print(C_d_p)
     C_l = W_i/(q*S_w)
     #print(C_l)
 
@@ -213,8 +214,8 @@ for i in range (len(V_array_kts)):
     roc = (T_sl/W_i - 1/(C_l/C_d))*V*60
     roc_array = np.append(roc_array,[roc])
 
-print('Your max range is: \n' +  str(np.max(R_array)) + ' miles\nThis value occurs at:\n' + str(V_array_kts[np.argmax(R_array)]) + ' kts\n\n')
-print('Your max endurance is:\n' + str(np.max(E_array)) + ' hr\n' + str(V_array_kts[np.argmax(E_array)]) + ' kts')
+#print('Your max range is: \n' +  str(np.max(R_array)) + ' miles\nThis value occurs at:\n' + str(V_array_kts[np.argmax(R_array)]) + ' kts\n\n')
+#print('Your max endurance is:\n' + str(np.max(E_array)) + ' hr\n' + str(V_array_kts[np.argmax(E_array)]) + ' kts')
 
 plt.plot(V_array_kts, D_tot_array, label = 'Total Drag')
 plt.plot(V_array_kts, D_i_array, label = 'Induced Drag')
