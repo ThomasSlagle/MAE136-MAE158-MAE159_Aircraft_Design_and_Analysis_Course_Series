@@ -349,6 +349,9 @@ sfc_15_M = np.array([0.044008,0.176616,0.312153,0.440115,0.549997,0.667388,0.775
 sfc_25_c = np.array([0.45,0.5,0.55,0.6,0.65,0.7])
 sfc_25_M = np.array([0.295317,0.421887,0.557711,0.705871,0.836535,0.968233])
 
+sfc_35_c = np.array([0.6,0.65,0.68,0.7,0.75,0.8,0.9,0.95,1.05])
+sfc_35_T = np.array([7000,5000,4000,3000,2500,23000,2000,1600,1000])
+
 thrust_25_M = np.array([])
 thrust_25_M = fix_data2(thrust_25_M, '25, M', fig_thrust)
 
@@ -360,3 +363,5 @@ coef_thrust_25, cov_thrust_25 = curve_fit(test_2nd, thrust_25_M, thrust_25_T)
 
 coef_sfc_15, cov_sfc_15 = curve_fit(test_lin, sfc_15_M, sfc_15_c)
 coef_sfc_25, cov_sfc_25 = curve_fit(test_lin, sfc_25_M, sfc_25_c)
+coef_sfc_35, cov_sfc_35 = curve_fit(test_2nd, sfc_35_T, sfc_35_c)
+
