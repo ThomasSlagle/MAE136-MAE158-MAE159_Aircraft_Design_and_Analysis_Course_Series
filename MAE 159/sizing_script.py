@@ -16,7 +16,7 @@ mission_type = 0
 
 #Mission selection loop
 while (mission_type != 1 or mission_type != 2 or mission_type != 3 or mission_type != 4):
-    mission_type = 4#int(input("Enter your mission type (1 for Non-Stop, 2 for One-stop, 3 for DC-10 Sample Code): "))
+    mission_type = 3#int(input("Enter your mission type (1 for Non-Stop, 2 for One-stop, 3 for DC-10 Sample Code): "))
 
     if (mission_type == 1):
         #non Stop
@@ -272,7 +272,7 @@ while (T_r_jt9d_2 > 10000):
         wt = wt_7vstall * dgp.linear(M_lo, dgp.coef_JT9D)/dgp.linear(0, dgp.coef_JT9D) + adj_w
 
         print('W/T is: ' + str(wt))
-        exit()
+        #exit()
 
 
 
@@ -453,6 +453,66 @@ while (T_r_jt9d_2 > 10000):
         adj_w = adj_w + 0.1
 
 
+#Climb Gradients
+
+# Check the available thrust sectiosn here
+
+#1st seg
+c_l_to = c_l_takeoff/(1.2**2)
+c_l_ratio = c_l_to/c_l_takeoff
+c_d_0_to = dgp.order_2nd(c_l_ratio, dgp.coef_6_to)
+#print(c_d_0_to)
+c_d_1st = c_d_0 + c_d_0_to + 0.0145 + c_l_to**2/(np.pi*ar*e)
+l_d_to = c_l_to/c_d_1st
+T_req_1st = w_to/l_d_to
+T_a_1st = 62287
+grad_1st = (2*T_a_1st - T_req_1st)/w_to * 100
+#print(grad_1st)
+
+#2nd
+c_d_2nd = c_d_0 + c_d_0_to + c_l_to**2/(np.pi*ar*e)
+l_d_2nd = c_l_to/c_d_2nd
+T_req_2nd = w_to/l_d_2nd
+grad_2nd = (2*T_a_1st - T_req_2nd)/w_to * 100
+
+#3rd
+V_3rd = 1.2* (296*ws_takeoff/(0.925*1.10))**(1/2)
+M_3rd = V_3rd/659
+c_l_3rd = 1.10/(1.2**2)
+c_d_3rd = c_d_0 + c_l_3rd**2/(np.pi*ar*e)
+l_d_3rd = c_l_3rd/c_d_3rd
+T_req_3rd = w_to/l_d_3rd
+T_a_3rd = 47844
+grad_3rd = (2*T_a_3rd - T_req_3rd)/w_to * 100
+
+#Approach
+c_l_ap = c_l_takeoff/(1.3**2)
+c_l_ratio_ap = 0.592
+c_d_0_ap = dgp.order_2nd(c_l_ratio_ap, dgp.coef_6_to)
+c_d_ap = c_d_0 + c_d_0_ap + c_l_ap**2/(np.pi*ar*e)
+l_d_ap = c_l_ap/c_d_0_ap
+T_req_ap = w_1/l_d_ap
+V_ap = (296*100/0.953/1.04)**(1/2)
+T_a_ap = 53260
+grad_ap = (2*T_a_ap - T_req_ap)/w_1 * 100
+
+#Landing
+c_l_ld = c_l_landing/(1.3**2)
+c_l_ratio_ld = 0.592
+c_d_0_ld = dgp.order_2nd(c_l_ratio, dgp.coef_6_l)
+c_d_ld = c_d_0 + c_d_0_ld + c_l_ld**2/(np.pi*ar*e)
+l_d_ld = c_l_ld/c_d_ld
+T_req_ld = w_1/l_d_ld
+T_a_ld = 67162
+grad_ld = (3*T_a_ld - T_req_ld)/w_1 * 100
+
+print(grad_1st)
+print(grad_2nd)
+print(grad_3rd)
+print(grad_ap)
+print(grad_ld)
+
+
 #Direct Operating Cost
 D = air_range*1.15078
 t_gm = D/(11.866 + 0.040669*D)/60#0.25*ar
@@ -469,10 +529,10 @@ F_block = w_f_climb + (T_r_cruise * sfc_35 * (t_cr+0.10))
 
 #flight cost
 passanger = ((205*num_p + 50*num_p)+W_cargo)/2000
-dollar_hr = 17.849 * M_cruise*973.14/1.68781 * (w_to/10**5)**0.3 + 40.83
+dollar_hr = 17.849 * (M_cruise*973.14/1.68781 * w_to/10**5)**0.3 + 40.83
 ctm_cr = dollar_hr / (V_block*passanger)
 #fuel cost
-ctm_fuel = 1.02*F_block*0.0438 + num_e*2.15*time_block*0.135/(D*passanger)
+ctm_fuel = (1.02*F_block*0.0438 + num_e*2.15*time_block*0.135)/(D*passanger)
 
 #Insurance cost
 Wa = w_to*(1-wf_wto)-(215*num_p+W_cargo)-W_pp*w_to
@@ -510,5 +570,8 @@ ctm_total = 2*(ctm_directEq+ctm_airframe+ctm_engine+ctm_material)
 ctm_dep = 1/(V_block*passanger) * (Ct + 0.06*(Ct-num_e*Ce)+0.3*num_e*Ce)/(15*U)
 
 doc = ctm_cr + ctm_fuel + ctm_hull + ctm_total + ctm_dep #per ton mile
-
-print(doc*passanger/num_p) # per passangar mile
+doc_table = np.array([['Flight crew', 'Fuel and oil', 'Insurance', 'Maintenance', 'Depreciation'],
+[(ctm_cr/doc*100), (ctm_fuel/doc*100), (ctm_hull/doc*100), (ctm_total/doc*100), (ctm_dep/doc*100)]])
+print(str(doc*passanger/num_p) + ' per passanger mile') # per passangar mile
+#print('DOC:' + str(doc))
+print(doc_table)

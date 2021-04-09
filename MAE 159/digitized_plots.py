@@ -290,6 +290,31 @@ coef_5_3e, cov_5_3e = curve_fit(test_2nd, Y3, X3)
 # 4 Engines
 
 
+
+#Figure 6 incremental profile drag for high lift systems
+
+fig_6 = pd.read_excel(r'C:\Users\Tommy Slagle\Documents\MAE136-MAE158-MAE159_Aircraft_Design_and_Analysis_Course_Series\MAE 159\Other data\159 Digitized Plots.xlsx',sheet_name='Figure 6')
+
+# takeoff
+cd_6_to = np.array([])
+cd_6_to = fix_data2(cd_6_to, 'to, cd', fig_6)
+
+cl_6_to = np.array([])
+cl_6_to = fix_data2(cl_6_to, 'to, cl', fig_6)
+
+coef_6_to, cov_6_to = curve_fit(test_2nd, cl_6_to, cd_6_to)
+
+
+# landing
+cd_6_l = np.array([])
+cd_6_l = fix_data2(cd_6_l, 'l, cd', fig_6)
+
+cl_6_l = np.array([])
+cl_6_l = fix_data2(cl_6_l, 'l, cl', fig_6)
+
+coef_6_l, cov_6_l = curve_fit(test_2nd, cl_6_l, cd_6_l)
+
+
 #JT9D-7 Performance
 
 mach = np.array([0,0.15,0.30,0.45])
