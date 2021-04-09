@@ -16,7 +16,7 @@ mission_type = 0
 
 #Mission selection loop
 while (mission_type != 1 or mission_type != 2 or mission_type != 3 or mission_type != 4):
-    mission_type = 3#int(input("Enter your mission type (1 for Non-Stop, 2 for One-stop, 3 for DC-10 Sample Code): "))
+    mission_type = 4#int(input("Enter your mission type (1 for Non-Stop, 2 for One-stop, 3 for DC-10 Sample Code): "))
 
     if (mission_type == 1):
         #non Stop
@@ -59,7 +59,7 @@ while (mission_type != 1 or mission_type != 2 or mission_type != 3 or mission_ty
         break
 
     elif (mission_type == 4):
-        num_p = 214 #Class 3
+        num_p = 214
         W_cargo = 3000 #lbs
         air_range = 3900 #nautical miles
         l_takeoff = 6300 #feet
@@ -260,16 +260,19 @@ while (T_r_jt9d_2 > 10000):
             exit()
 
         wt_7vstall = engineequation/ws_takeoff*sigma_0*c_l_takeoff
+        #print(ws_takeoff)
         v_lo = 1.2 * (296*ws_takeoff/(sigma_0*c_l_takeoff))**(1/2)
         #print(ws_takeoff)
         #print(v_lo)
         M_lo = v_lo/661/(sigma_0**(1/2))*0.7
         #print(M_lo)
         #print(wt_7vstall)
+        #print(dgp.linear(M_lo, dgp.coef_JT9D))
+        #print(dgp.linear(0, dgp.coef_JT9D))
         wt = wt_7vstall * dgp.linear(M_lo, dgp.coef_JT9D)/dgp.linear(0, dgp.coef_JT9D) + adj_w
 
         print('W/T is: ' + str(wt))
-
+        exit()
 
 
 
