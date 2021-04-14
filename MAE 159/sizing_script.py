@@ -114,7 +114,7 @@ T_r_jt9d_2 = 10001
 
 c_l_initialcruise = 0
 count_cl=0
-count_w=0S
+count_w=0
 
 
 #Thrust on top loop
@@ -130,79 +130,48 @@ while (T_r_jt9d_2 > 10000):
                 delta_M_div = dgp.order_3rd(C_l, dgp.coef_2_s)
 
             M_div = (M_cruise + 0.004) - delta_M_div
-            print(M_div)
+
             if (airfoil_type == 'conventional'):
                 #figure 1a for t/c
                 #tc = dgp.linear(M_div, dgp.coef_1a_35)
-                if (sweep == 0):
-                    tc = dgp.linear(M_div, dgp.coef_1a_0)
-                elif (sweep < 10):
-                    tc = np.interp(M_div, [M_div,dgp.linear(M_div, dgp.coef_1a_0)], [M_div,dgp.linear(M_div, dgp.coef_1a_10)])
-                elif(sweep == 10):
-                    tc = dgp.linear(M_div, dgp.coef_1a_10)
-                elif (sweep > 10 and sweep < 15):
-                    tc = np.interp(M_div, [M_div,dgp.linear(M_div, dgp.coef_1a_10)], [M_div,dgp.linear(M_div, dgp.coef_1a_15)])
-                elif(sweep == 15):
-                    tc = dgp.linear(M_div, dgp.coef_1a_15)
-                elif (sweep > 15 and sweep < 20):
-                    tc = np.interp(M_div, [M_div,dgp.linear(M_div, dgp.coef_1a_15)], [M_div,dgp.linear(M_div, dgp.coef_1a_20)])
-                elif(sweep == 20):
-                    tc = dgp.linear(M_div, dgp.coef_1a_20)
-                elif (sweep > 20 and sweep < 25):
-                    tc = np.interp(M_div, [M_div,dgp.linear(M_div, dgp.coef_1a_20)], [M_div,dgp.linear(M_div, dgp.coef_1a_25)])
-                elif(sweep == 25):
-                    tc = dgp.linear(M_div, dgp.coef_1a_25)
-                elif (sweep > 25 and sweep < 30):
-                    tc = np.interp(M_div, [M_div,dgp.linear(M_div, dgp.coef_1a_25)], [M_div,dgp.linear(M_div, dgp.coef_1a_30)])
-                elif(sweep == 30):
-                    tc = dgp.linear(M_div, dgp.coef_1a_30)
-                elif (sweep > 30 and sweep < 35):
-                    tc = np.interp(M_div, [M_div,dgp.linear(M_div, dgp.coef_1a_30)], [M_div,dgp.linear(M_div, dgp.coef_1a_35)])
-                elif(sweep == 35):
-                    tc = dgp.linear(M_div, dgp.coef_1a_35)
-                elif (sweep > 35 and sweep < 40):
-                    tc = np.interp(M_div, [M_div,dgp.linear(M_div, dgp.coef_1a_35)], [M_div,dgp.linear(M_div, dgp.coef_1a_40)])
-                elif(sweep == 40):
-                    tc = dgp.linear(M_div, dgp.coef_1a_40)
+                if (sweep >= 0 and sweep < 10):
+                    tc = dgp.linear(M_div, dgp.coef_1a_0)*((10-sweep)/(10-0)) + dgp.linear(M_div, dgp.coef_1a_10)*(1-(10-sweep)/(10-0))
+                elif (sweep > 10 and sweep <= 15):
+                    tc = dgp.linear(M_div, dgp.coef_1a_10)*((15-sweep)/(15-10)) + dgp.linear(M_div, dgp.coef_1a_15)*(1-(15-sweep)/(15-10))
+                elif (sweep > 15 and sweep <= 20):
+                    tc = dgp.linear(M_div, dgp.coef_1a_15)*((20-sweep)/(20-15)) + dgp.linear(M_div, dgp.coef_1a_20)*(1-(20-sweep)/(20-15))
+                elif (sweep > 20 and sweep <= 25):
+                    tc = dgp.linear(M_div, dgp.coef_1a_20)*((25-sweep)/(25-20)) + dgp.linear(M_div, dgp.coef_1a_25)*(1-(25-sweep)/(25-20))
+                elif (sweep > 25 and sweep <= 30):
+                    tc = dgp.linear(M_div, dgp.coef_1a_25)*((30-sweep)/(30-25)) + dgp.linear(M_div, dgp.coef_1a_30)*(1-(30-sweep)/(30-25))
+                elif (sweep > 30 and sweep <= 35):
+                    tc = dgp.linear(M_div, dgp.coef_1a_30)*((35-sweep)/(35-30)) + dgp.linear(M_div, dgp.coef_1a_35)*(1-(35-sweep)/(35-30))
+                elif (sweep > 35 and sweep <= 40):
+                    tc = dgp.linear(M_div, dgp.coef_1a_35)*((40-sweep)/(40-35)) + dgp.linear(M_div, dgp.coef_1a_40)*(1-(40-sweep)/(40-35))
+                elif (sweep > 40 and sweep <= 45):
+                    tc = dgp.linear(M_div, dgp.coef_1a_40)*((45-sweep)/(45-40)) + dgp.linear(M_div, dgp.coef_1a_45)*(1-(45-sweep)/(45-40))
 
                 else:
                     print('Sweep value is bad, please check!')
                     exit()
             else:
-                if (sweep == 0):
-                    tc = dgp.order_2nd(M_div, dgp.coef_1b_0)
-                elif (sweep > 0 and sweep < 5):
-                    tc = np.interp(M_div, [M_div,dgp.order_2nd(M_div, dgp.coef_1b_0)], [M_div,dgp.order_2nd(M_div, dgp.coef_1b_5)])
-                elif (sweep == 5):
-                    tc = dgp.order_2nd(M_div, dgp.coef_1b_5)
-                elif (sweep > 5 and sweep < 10):
-                    tc = np.interp(M_div, [M_div,dgp.order_2nd(M_div, dgp.coef_1b_5)], [M_div,dgp.order_2nd(M_div, dgp.coef_1b_10)])
-                elif(sweep == 10):
-                    tc = dgp.order_2nd(M_div, dgp.coef_1b_10)
-                elif (sweep > 10 and sweep < 15):
-                    tc = np.interp(M_div, [M_div,dgp.order_2nd(M_div, dgp.coef_1b_10)], [M_div,dgp.order_2nd(M_div, dgp.coef_1b_15)])
-                elif(sweep == 15):
-                    tc = dgp.order_2nd(M_div, dgp.coef_1b_15)
-                elif (sweep > 15 and sweep < 20):
-                    tc = np.interp(M_div, [M_div,dgp.order_2nd(M_div, dgp.coef_1b_15)], [M_div,dgp.order_2nd(M_div, dgp.coef_1b_20)])
-                elif(sweep == 20):
-                    tc = dgp.order_2nd(M_div, dgp.coef_1b_20)
-                elif (sweep > 20 and sweep < 25):
-                    tc = np.interp(M_div, [M_div,dgp.order_2nd(M_div, dgp.coef_1b_20)], [M_div,dgp.order_2nd(M_div, dgp.coef_1b_25)])
-                elif(sweep == 25):
-                    tc = dgp.order_2nd(M_div, dgp.coef_1a_25)
-                elif (sweep > 25 and sweep < 30):
-                    tc = np.interp(M_div, [M_div,dgp.order_2nd(M_div, dgp.coef_1b_25)], [M_div,dgp.order_2nd(M_div, dgp.coef_1b_30)])
-                elif(sweep == 30):
-                    tc = dgp.order_2nd(M_div, dgp.coef_1b_30)
-                elif (sweep > 30 and sweep < 35):
-                    tc = np.interp(M_div, [M_div,dgp.order_2nd(M_div, dgp.coef_1b_30)], [M_div,dgp.order_2nd(M_div, dgp.coef_1b_35)])
-                elif(sweep == 35):
-                    tc = dgp.order_2nd(M_div, dgp.coef_1b_35)
-                elif (sweep > 35 and sweep < 40):
-                    tc = np.interp(M_div, [M_div,dgp.order_2nd(M_div, dgp.coef_1b_35)], [M_div,dgp.order_2nd(M_div, dgp.coef_1b_40)])
-                elif(sweep == 40):
-                    tc = dgp.order_2nd(M_div, dgp.coef_1b_40)
+                if (sweep >= 0 and sweep < 5):
+                    tc = dgp.linear(M_div, dgp.coef_1b_0)*((5-sweep)/(5-0)) + dgp.linear(M_div, dgp.coef_1b_5)*(1-(5-sweep)/(5-0))
+                elif (sweep > 5 and sweep <= 10):
+                    tc = dgp.linear(M_div, dgp.coef_1b_5)*((10-sweep)/(10-5)) + dgp.linear(M_div, dgp.coef_1b_10)*(1-(10-sweep)/(10-5))
+                elif (sweep > 10 and sweep <= 15):
+                    tc = dgp.linear(M_div, dgp.coef_1b_10)*((15-sweep)/(15-10)) + dgp.linear(M_div, dgp.coef_1b_15)*(1-(15-sweep)/(15-10))
+                elif (sweep > 15 and sweep <= 20):
+                    tc = dgp.linear(M_div, dgp.coef_1b_15)*((20-sweep)/(20-15)) + dgp.linear(M_div, dgp.coef_1b_20)*(1-(20-sweep)/(20-15))
+                elif (sweep > 20 and sweep <= 25):
+                    tc = dgp.linear(M_div, dgp.coef_1b_20)*((25-sweep)/(25-20)) + dgp.linear(M_div, dgp.coef_1b_25)*(1-(25-sweep)/(25-20))
+                elif (sweep > 25 and sweep <= 30):
+                    tc = dgp.linear(M_div, dgp.coef_1b_25)*((30-sweep)/(30-25)) + dgp.linear(M_div, dgp.coef_1b_30)*(1-(30-sweep)/(30-25))
+                elif (sweep > 30 and sweep <= 35):
+                    tc = dgp.linear(M_div, dgp.coef_1b_30)*((35-sweep)/(35-30)) + dgp.linear(M_div, dgp.coef_1b_35)*(1-(35-sweep)/(35-30))
+                elif (sweep > 35 and sweep <= 40):
+                    tc = dgp.linear(M_div, dgp.coef_1b_35)*((40-sweep)/(40-35)) + dgp.linear(M_div, dgp.coef_1b_40)*(1-(40-sweep)/(40-35))
+
                 else:
                     print('Sweep value is bad, please check!')
                     exit()
