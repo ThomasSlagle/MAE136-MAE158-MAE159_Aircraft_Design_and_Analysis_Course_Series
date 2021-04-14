@@ -114,14 +114,13 @@ T_r_jt9d_2 = 10001
 
 c_l_initialcruise = 0
 count_cl=0
-count_w=0
+count_w=0S
 
 
 #Thrust on top loop
 while (T_r_jt9d_2 > 10000):
     #Range Loop
     while ((R_allout - R_total) > 50):
-
         # C_L loop
         while (np.abs((C_l - c_l_initialcruise)/C_l) > 0.005):
             #figure 2 to get delta_M_div
@@ -131,7 +130,7 @@ while (T_r_jt9d_2 > 10000):
                 delta_M_div = dgp.order_3rd(C_l, dgp.coef_2_s)
 
             M_div = (M_cruise + 0.004) - delta_M_div
-
+            print(M_div)
             if (airfoil_type == 'conventional'):
                 #figure 1a for t/c
                 #tc = dgp.linear(M_div, dgp.coef_1a_35)
@@ -306,6 +305,9 @@ while (T_r_jt9d_2 > 10000):
         #W = (W_w+W_ts)*w_to**1.195 + W_f*w_to**0.235 + (W_lg+W_np+W_pp+W_fuel+W_fixedequip-1)*w_to + (W_payload + W_fe_cts)
         #plt.plot(w_to,W)
         #plt.show()
+        #exit()
+
+
         w_to = 100000
         W = 1000
         while(W > 100):
@@ -329,7 +331,7 @@ while (T_r_jt9d_2 > 10000):
         chord_average = S/b
         T = w_to/wt
         T_e = T/num_e
-
+        print(T_e)
 
 
         #Drag Calculation
@@ -340,6 +342,7 @@ while (T_r_jt9d_2 > 10000):
         altitude_index = altitude_[0][0]
         #print(altitude_index)
         Rn_foot = M_05 * of.speed_sound[altitude_index]/of.k_visc[altitude_index] # /ft
+
         #print(Rn_foot)
         def Rn (x):
             return Rn_foot*x
@@ -369,7 +372,8 @@ while (T_r_jt9d_2 > 10000):
 
         f_total = (f_pylon+f_nac+f_tail+f_fuse+f_wing)*1.06
         c_d_0 = f_total/S
-
+        print(c_d_0)
+        exit()
         e = 1/(1.035+0.38*c_d_0*np.pi*ar)
 
         #Climb
