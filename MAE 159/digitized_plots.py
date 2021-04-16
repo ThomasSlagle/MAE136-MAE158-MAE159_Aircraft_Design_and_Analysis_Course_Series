@@ -288,7 +288,13 @@ Y3 = fix_data2(Y3, '3, TOFL', fig_5)
 coef_5_3e, cov_5_3e = curve_fit(test_2nd, Y3, X3)
 
 # 4 Engines
+X4 = np.array([])
+X4 = fix_data2(X4, '4, W/S * W/T * 1/Clmax', fig_5)
 
+Y4 = np.array([])
+Y4 = fix_data2(Y4, '4, TOFL', fig_5)
+
+coef_5_4e, cov_5_4e = curve_fit(test_2nd, Y4, X4)
 
 
 #Figure 6 incremental profile drag for high lift systems

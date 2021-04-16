@@ -16,7 +16,7 @@ mission_type = 0
 
 #Mission selection loop
 while (mission_type != 1 or mission_type != 2 or mission_type != 3 or mission_type != 4):
-    mission_type = 3#int(input("Enter your mission type (1 for Non-Stop, 2 for One-stop, 3 for DC-10 Sample Code): "))
+    mission_type = 4#int(input("Enter your mission type (1 for Non-Stop, 2 for One-stop, 3 for DC-10 Sample Code): "))
 
     if (mission_type == 1):
         #non Stop
@@ -29,6 +29,7 @@ while (mission_type != 1 or mission_type != 2 or mission_type != 3 or mission_ty
         h_cruise_i = 35000. #ft
         fuel_remaning = 0.35
         num_e = 2
+        class3 = 1
         #print('hehe')
         break
 
@@ -43,6 +44,7 @@ while (mission_type != 1 or mission_type != 2 or mission_type != 3 or mission_ty
         h_cruise_i = 35000. #ft
         fuel_remaning = 0
         num_e = 2
+        class3 = 0
         #print('hehe2')
         break
 
@@ -56,18 +58,20 @@ while (mission_type != 1 or mission_type != 2 or mission_type != 3 or mission_ty
         h_cruise_i = 35000. #ft
         fuel_remaning = 0.25
         num_e = 3
+        class3 = 1
         break
 
     elif (mission_type == 4):
-        num_p = 214
-        W_cargo = 3000 #lbs
-        air_range = 3900 #nautical miles
-        l_takeoff = 6300 #feet
+        num_p = 350
+        W_cargo = 60000 #lbs
+        air_range = 4600 #nautical miles
+        l_takeoff = 10000 #feet
         v_approach = 140 #kts       #PL +35% max fuel
         M_cruise = 0.80
         h_cruise_i = 35000. #ft
         fuel_remaning = 0.35
-        num_e = 2
+        num_e = 4
+        class3 = 1
         break
 
     else:
@@ -88,7 +92,7 @@ sigma_20000 = 0.533
 delta_35000 = 0.2360
 
 airfoil_type = 'conventional'
-ar = 8
+ar = 7
 sweep = 35 # degrees
 C_l = 0.5
 taper = 0.35
@@ -100,9 +104,9 @@ fuse_engine = 0
 
 num_flightcrew = 2
 num_stew = np.ceil(num_p/50)
-num_abreast = 8
+num_abreast = 10
 num_aisles = 2
-jt8d = 1
+jt9d = 1
 
 adjust = 0
 R_total = 0
@@ -148,8 +152,8 @@ while (T_r_jt9d_2 > 10000):
                     tc = dgp.linear(M_div, dgp.coef_1a_30)*((35-sweep)/(35-30)) + dgp.linear(M_div, dgp.coef_1a_35)*(1-(35-sweep)/(35-30))
                 elif (sweep > 35 and sweep <= 40):
                     tc = dgp.linear(M_div, dgp.coef_1a_35)*((40-sweep)/(40-35)) + dgp.linear(M_div, dgp.coef_1a_40)*(1-(40-sweep)/(40-35))
-                elif (sweep > 40 and sweep <= 45):
-                    tc = dgp.linear(M_div, dgp.coef_1a_40)*((45-sweep)/(45-40)) + dgp.linear(M_div, dgp.coef_1a_45)*(1-(45-sweep)/(45-40))
+#                elif (sweep > 40 and sweep <= 45):
+#                    tc = dgp.linear(M_div, dgp.coef_1a_40)*((45-sweep)/(45-40)) + dgp.linear(M_div, dgp.coef_1a_45)*(1-(45-sweep)/(45-40))
 
                 else:
                     print('Sweep value is bad, please check!')
@@ -185,7 +189,7 @@ while (T_r_jt9d_2 > 10000):
             ws_landing = (v_approach/1.3)**2*((sigma_0*c_l_landing)/296)
             R_allout = air_range + 200 + 0.75*M_cruise*(a)#*0.592484)
 
-            if (jt8d == 1):
+            if (jt9d == 1):
                 #fig 4 for wf/wto
                 #JT9D to JT8D
                 wf_wto = dgp.order_3rd(R_allout, dgp.coef_4) * 0.61/0.78 + 0.04*dgp.order_3rd(R_allout, dgp.coef_4) * 0.61/0.78 + adjust#1.2307
@@ -202,7 +206,7 @@ while (T_r_jt9d_2 > 10000):
             else:
                 C_l = C_l - 0.001
             count_cl = count_cl+1
-            if(count_cl > 1000):
+            if(count_cl > 50000):
                 print('(C_l loop) too many itterations, STOPPING!')
                 exit()
 
@@ -221,8 +225,8 @@ while (T_r_jt9d_2 > 10000):
             #print(engineequation)
         elif(num_e == 3):
             engineequation = dgp.order_2nd(l_takeoff, dgp.coef_5_3e)
-            #print(dgp.order_2nd(l_takeoff, dgp.coef_5_2e))
-            #print(dgp.order_2nd(l_takeoff, dgp.coef_5_3e))
+        elif(num_e == 4):
+            engineequation = dgp.order_2nd(l_takeoff, dgp.coef_5_4e)
         else:
             print('engine count error. Please check!')
             exit()
@@ -252,12 +256,14 @@ while (T_r_jt9d_2 > 10000):
             Kw = 1.0
             Kts = 0.17
 
-        W_w = (0.00945*ar**0.8*(1+taper)**0.25*Kw*n**0.5)/((tc)**0.4*np.cos(np.radians(sweep))*ws_takeoff**0.695)
-        # ^ tc + 0.03
-
+        W_w = (0.00945*ar**0.8*(1+taper)**0.25*Kw*n**0.5)/((tc+0.03)**0.4*np.cos(np.radians(sweep))*ws_takeoff**0.695)
 
         l_f = 3.76 * num_p/num_abreast + 33.2
+        if (class3 == 1):
+            l_f = 1.10*l_f
         dia_f = 1.75*num_abreast + 1.58*num_aisles + 1.0
+        if (class3 == 1):
+            dia_f = 1.10*dia_f
         W_f = 0.6727 * k_f * l_f**0.6 * dia_f**0.72 * n**0.3
 
         W_lg = 0.040
@@ -288,19 +294,23 @@ while (T_r_jt9d_2 > 10000):
             w_to = w_to + 5
             count_w = count_w+1
             #print(count)
-            if(count_w > 200000):
+            if(count_w > 500000):
                 print('(weight loop) too many itterations, STOPPING!')
                 print(w_to)
                 exit()
         print('Takeoff Weight is: '+ str(w_to) + ' lbs')
+        #exit()
         #print(W)
 
         S = w_to/(ws_takeoff)
+        print(S)
         b = (ar*S)**(1/2)
+        print(b)
         chord_average = S/b
         T = w_to/wt
         T_e = T/num_e
-        print(T_e)
+        #print(T_e)
+        exit()
 
 
         #Drag Calculation
@@ -341,9 +351,10 @@ while (T_r_jt9d_2 > 10000):
 
         f_total = (f_pylon+f_nac+f_tail+f_fuse+f_wing)*1.06
         c_d_0 = f_total/S
-        print(c_d_0)
-        exit()
+        #print(c_d_0)
+        #exit()
         e = 1/(1.035+0.38*c_d_0*np.pi*ar)
+        print(e)
 
         #Climb
         h_average_climb = 20/35*h_cruise_i
