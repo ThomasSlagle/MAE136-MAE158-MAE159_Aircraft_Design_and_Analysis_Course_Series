@@ -152,9 +152,6 @@ while (T_r_jt9d_2 > 10000):
                     tc = dgp.linear(M_div, dgp.coef_1a_30)*((35-sweep)/(35-30)) + dgp.linear(M_div, dgp.coef_1a_35)*(1-(35-sweep)/(35-30))
                 elif (sweep > 35 and sweep <= 40):
                     tc = dgp.linear(M_div, dgp.coef_1a_35)*((40-sweep)/(40-35)) + dgp.linear(M_div, dgp.coef_1a_40)*(1-(40-sweep)/(40-35))
-#                elif (sweep > 40 and sweep <= 45):
-#                    tc = dgp.linear(M_div, dgp.coef_1a_40)*((45-sweep)/(45-40)) + dgp.linear(M_div, dgp.coef_1a_45)*(1-(45-sweep)/(45-40))
-
                 else:
                     print('Sweep value is bad, please check!')
                     exit()
@@ -180,7 +177,6 @@ while (T_r_jt9d_2 > 10000):
                     print('Sweep value is bad, please check!')
                     exit()
 
-
             C = np.cos(np.radians(sweep))**2*tc**2*ar
             #fig 3 to get CL maxes
             c_l_takeoff = dgp.order_2nd(C, dgp.coef_3_t)
@@ -192,7 +188,7 @@ while (T_r_jt9d_2 > 10000):
             if (jt9d == 1):
                 #fig 4 for wf/wto
                 #JT9D to JT8D
-                wf_wto = dgp.order_3rd(R_allout, dgp.coef_4) * 0.61/0.78 + 0.04*dgp.order_3rd(R_allout, dgp.coef_4) * 0.61/0.78 + adjust#1.2307
+                wf_wto = 1.04*dgp.order_3rd(R_allout, dgp.coef_4)*0.61/0.78 #+ 0.04*dgp.order_3rd(R_allout, dgp.coef_4) * 0.61/0.78 + adjust#1.2307
             else:
                 wf_wto = dgp.order_3rd(R_allout, dgp.coef_4) + adjust
 
@@ -276,7 +272,7 @@ while (T_r_jt9d_2 > 10000):
         W_fixedequip = 0.035
         W_fe_cts = 132*num_p + 300*num_e + 260*num_flightcrew + 170*num_stew
 
-        #w_to = np.linspace(100000,750000, 100000)
+        #w_to = np.linspace(100000,1000000, 100000)
         #W = (W_w+W_ts)*w_to**1.195 + W_f*w_to**0.235 + (W_lg+W_np+W_pp+W_fuel+W_fixedequip-1)*w_to + (W_payload + W_fe_cts)
         #plt.plot(w_to,W)
         #plt.show()

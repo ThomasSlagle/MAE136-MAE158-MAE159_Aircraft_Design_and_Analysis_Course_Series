@@ -1,0 +1,85 @@
+\documentclass{article}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{multirow}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{stfloats}
+\usepackage{setspace}
+
+\title{MAE 159 Midterm Aircraft Sizing Report}
+\author{Thomas Slagle}
+\date{May 7th, 2021}
+
+\parskip=10pt
+
+\begin{document}
+    \maketitle
+
+    \section{Introduction}
+    \begin{flushleft}
+        This report consists of a study on the cost and performance optimization
+        for two subsoinc commercial transport aircraft. Herein, the reader will
+        find a summary of the methods used and the data generated from an
+        itterative python script which uses standard, well-defined aircraft
+        deisgn methods to exactly meet the design specifications. Various
+        parameters, including ... , were systematically varied to determine the
+        optimum design parameters.
+    \end{flushleft}
+
+    \section{Design Specifications}
+    \begin{flushleft}
+        As mentioned prior, two aircraft with distinct given design
+        requirements, were considered in this design study. Both aircraft are
+        requried to carry 225 passangers adn complete a 7400 nautical mile
+        journey. The first larger aircraft must compelte the journey without any
+        stops. The second smaller aircraft must complete the journey with
+        one-stop, giving the airplane a required range of 3700 nautical miles.
+        The complete set of given design specifications are listed in tables 1
+        and 2 below. For both aircraft, takeoff conditions were assumed to be at
+        sea level on a hot day with an air temperature of $84^{\circ}F$.
+    \end{flushleft}
+
+\begin{table}[ht]
+    \begin{tabular}{|c|c|}
+    \hline
+    \rowcolor[HTML]{FFC702}
+    \multicolumn{2}{|c|}{\cellcolor[HTML]{FFC702}\textbf{Non-stop Aircraft}} \\ \hline
+    \textbf{Design Specification:}        & \textbf{Parameter Value:}        \\ \hline
+    Number of Passangers                  & 225                              \\ \hline
+    \rowcolor[HTML]{C0C0C0}
+    Weight of Cargo                       & 6,000 lbs                        \\ \hline
+    Still Air Range                       & 7,400 nmi                        \\ \hline
+    \rowcolor[HTML]{C0C0C0}
+    Takeoff Field Length                  & 10,500 ft                        \\ \hline
+    Landing Approach Speed                & 140 kts                          \\ \hline
+    \rowcolor[HTML]{C0C0C0}
+    Fuel Destination Payload              & 35\%                             \\ \hline
+    Cruise Mach Number                    & 0.85                             \\ \hline
+    \rowcolor[HTML]{C0C0C0}
+    Initial Cruise Altitude               & 35,000 ft                        \\ \hline
+    \end{tabular}
+    \quad
+    \begin{tabular}{|c|c|}
+        \hline
+        \rowcolor[HTML]{DAE8FC}
+        \multicolumn{2}{|c|}{\cellcolor[HTML]{DAE8FC}\textbf{One-stop Aircraft}} \\ \hline
+        \textbf{Design Specification:}        & \textbf{Parameter Value:}        \\ \hline
+        Number of Passangers                  & 225                              \\ \hline
+        \rowcolor[HTML]{C0C0C0}
+        Weight of Cargo                       & 3,000 lbs                        \\ \hline
+        Still Air Range                       & 3,700 nmi                        \\ \hline
+        \rowcolor[HTML]{C0C0C0}
+        Takeoff Field Length                  & 6,000 ft                         \\ \hline
+        Landing Approach Speed                & 130 kts                          \\ \hline
+        \rowcolor[HTML]{C0C0C0}
+        Fuel Destination Payload              & 0\%                              \\ \hline
+        Cruise Mach Number                    & 0.80                             \\ \hline
+        \rowcolor[HTML]{C0C0C0}
+        Initial Cruise Altitude               & 35,000 ft                        \\ \hline
+    \end{tabular}
+\end{table}
+
+
+
+
+\end{document}
