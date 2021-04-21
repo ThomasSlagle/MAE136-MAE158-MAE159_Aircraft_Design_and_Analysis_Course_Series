@@ -2,6 +2,15 @@
 \usepackage{geometry}
 \geometry{margin=1in}
 \usepackage{multirow}
+
+
+%Figures
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{array}
+\graphicspath{ {./images/} }
+
+%Tables
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{stfloats}
 \usepackage{setspace}
@@ -105,10 +114,38 @@
             to 9.5, as such, this formed the basis for design selection. Aspect
             ratios in steps of 0.5 were considered from 6.0 to 10.0 during this
             study. The method for comparison will be the resulting DOC per
-            passanger, per mile. The figure shows sweep angle versus
+            passanger, per mile. Figure \ref{fig:doctmAR} shows sweep angle versus
             the DOC with curves of fixed aspect ratio for both aircraft.
+            \begin{figure*}[ht]
+                \centering
+                \includegraphics[scale=0.4]{DOCTM v Sweep Angle.PNG}
+                \caption{Direct operating cost, per ton, per mile plotted against sweep angle for the non-stop and one-stop aircraft at different aspect ratios.}
+                \label{fig:doctmAR}
+            \end{figure*}
+
+            From figure \ref{fig:doctmAR}, it is evident that for the non-stop
+            aircraft, the optimized aspect ratio is between 7.5 and 8. For the
+            one-stop aircraft, the optimized aspect ratio is between 9.5 and 10.
         \end{flushleft}
     \subsection{Wing Sweep Angle Variation}
+        \begin{flushleft}
+            Starting with the best two values of aspect ratio determine from the
+            aspect ratio variation plots, the optimized wing sweep angle can be
+            determined by plotting the DOC against the wing sweep angle. For
+            easier interpertation of the data, only the best two aspect ratios
+            obtained in the previous subsection were utilized in this
+            determination. These results are plotted in figure \ref{fig:AR}.
+
+            \begin{figure*}[ht]
+                \centering
+                \includegraphics[scale=0.4]{AR Plot.PNG}
+                \caption{Direct operating cost, per ton, per mile plotted against sweep angle for the non-stop and one-stop aircraft at the optimized aspect ratios.}
+                \label{fig:AR}
+            \end{figure*}
+
+            From figure \ref{fig:AR}, it is determined that the minimum DOC per ton, per mile is 0.1069204 and 0.11001131 for the non-stop and one-stop aircraft respectively.
+
+        \end{flushleft}
     \subsection{Aircraft Seat Configuration}
     \subsection{Advanced Technology (aluminum v composite, conventional v supercritical)}
 
