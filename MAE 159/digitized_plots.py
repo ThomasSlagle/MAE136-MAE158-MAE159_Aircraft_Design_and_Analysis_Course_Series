@@ -225,7 +225,7 @@ Delta_md_s = fix_data2(Delta_md_s, 'Delta Mdiv, s', fig_2)
 C_l_s = np.array([])
 C_l_s = fix_data2(C_l_s, 'C_L, s', fig_2)
 
-coef_2_s, cov_2_s = curve_fit(test_2nd, C_l_s, Delta_md_s)
+coef_2_s, cov_2_s = curve_fit(test_3rd, C_l_s, Delta_md_s)
 
 
 
