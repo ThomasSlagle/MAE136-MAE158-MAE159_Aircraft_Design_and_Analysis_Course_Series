@@ -28,8 +28,11 @@ if (mission_type == 1):
     M_cruise = 0.85
     h_cruise_i = 35000. #ft
     fuel_remaning = 0.35
-    num_e = 2#int(input("num_e:")) #2
+    num_e = 4#int(input("num_e:")) #2
     class3 = 1
+
+    num_abreast = 6
+    num_aisles = 1
 
     ar = 7.9
     sweep = 37
@@ -48,6 +51,9 @@ elif (mission_type == 2):
     fuel_remaning = 0
     num_e = 2#int(input("num_e:")) #2
     class3 = 0
+
+    num_abreast = 6
+    num_aisles = 2
 
     ar = 9.5
     sweep = 31
@@ -107,8 +113,6 @@ weight_tech = 'composite'#'aluminum' #'composite'
 #ar_array = np.arange(6,12,0.1)
 #sweep_array = np.arange(10, 40, 1) #int(input('Enter Desired Sweep Angle: ')) # degrees
 
-num_e = 3
-
 C_l = 0.5
 taper = 0.35
 n = 1.5*2.5 #ultimate load factor
@@ -124,8 +128,6 @@ num_stew = np.ceil(num_p/50)
 if (mission_type == 1):
     num_stew = num_stew*2
 
-num_abreast = 6
-num_aisles = 1
 jt9d = 1
 
 adjust = 0
@@ -482,14 +484,15 @@ while (T_r_jt9d_2 > 10000):
         print('Required thrust to maintain top of climb is too high')
         print(T_r_jt9d_2)
         adj_w = adj_w - 0.1
-    #reset
-    adjust = 0
-    R_total = 0
-    R_allout = 100
-    count_cl = 0
-    count_w = 0
-    c_l_initialcruise = 0
-    count_adj = 0
+            #reset
+        adjust = 0
+        R_total = 0
+        R_allout = 100
+        count_cl = 0
+        count_w = 0
+        c_l_initialcruise = 0
+        count_adj = 0
+
 
 #Climb Gradients
 
@@ -685,8 +688,22 @@ doc_table = np.array([['Flight crew', 'Fuel and oil', 'Insurance', 'Maintenance'
 
 #print(mission_type)
 
-print(doc)
 print(w_to)
+
+print(sfc_35)
+print(M_cruise*a)
+print(l_d_cruise)
+
+print(wf_wto)
+
+
+print(wf_wto*w_to)
+
+
+print(W_payload)
+print('Total actual range is: ' + str(R_total))
+
+
 
 #print((w_to-w_1))
 #print(W_f*w_to**0.235)

@@ -16,13 +16,23 @@
 \usepackage{setspace}
 
 \title{MAE 159 Midterm Aircraft Sizing Report}
-\author{Thomas Slagle}
+\author{Thomas Slagle (72602272)}
 \date{May 7th, 2021}
 
 \parskip=10pt
 
 \begin{document}
     \maketitle
+    \begin{center}
+        \includegraphics[scale=0.4]{pngjoy.com_uci-logo-uc-irvine-henry-samueli-school-of_6860660.png}
+    \end{center}
+
+    \pagebreak
+    \tableofcontents
+    \pagebreak
+    \listoffigures
+    \listoftables
+    \pagebreak
 
     \section{Introduction}
     \label{sec:intro}
@@ -56,43 +66,44 @@
     \end{flushleft}
 
     \begin{table}[ht]
-    \begin{tabular}{|c|c|}
-    \hline
-    \rowcolor[HTML]{FFC702}
-    \multicolumn{2}{|c|}{\cellcolor[HTML]{FFC702}\textbf{Non-stop Aircraft}} \\ \hline
-    \textbf{Design Specification:}        & \textbf{Parameter Value:}        \\ \hline
-    Number of Passangers                  & 225                              \\ \hline
-    \rowcolor[HTML]{C0C0C0}
-    Weight of Cargo                       & 6,000 lbs                        \\ \hline
-    Still Air Range                       & 7,400 nmi                        \\ \hline
-    \rowcolor[HTML]{C0C0C0}
-    Takeoff Field Length                  & 10,500 ft                        \\ \hline
-    Landing Approach Speed                & 140 kts                          \\ \hline
-    \rowcolor[HTML]{C0C0C0}
-    Fuel Destination Payload              & 35\%                             \\ \hline
-    Cruise Mach Number                    & 0.85                             \\ \hline
-    \rowcolor[HTML]{C0C0C0}
-    Initial Cruise Altitude               & 35,000 ft                        \\ \hline
-    \end{tabular}
-    \quad
-    \begin{tabular}{|c|c|}
+        \begin{tabular}{|c|c|}
         \hline
-        \rowcolor[HTML]{DAE8FC}
-        \multicolumn{2}{|c|}{\cellcolor[HTML]{DAE8FC}\textbf{One-stop Aircraft}} \\ \hline
+        \rowcolor[HTML]{FFC702}
+        \multicolumn{2}{|c|}{\cellcolor[HTML]{FFC702}\textbf{Non-stop Aircraft}} \\ \hline
         \textbf{Design Specification:}        & \textbf{Parameter Value:}        \\ \hline
         Number of Passangers                  & 225                              \\ \hline
         \rowcolor[HTML]{C0C0C0}
-        Weight of Cargo                       & 3,000 lbs                        \\ \hline
-        Still Air Range                       & 3,700 nmi                        \\ \hline
+        Weight of Cargo                       & 6,000 lbs                        \\ \hline
+        Still Air Range                       & 7,400 nmi                        \\ \hline
         \rowcolor[HTML]{C0C0C0}
-        Takeoff Field Length                  & 6,000 ft                         \\ \hline
-        Landing Approach Speed                & 130 kts                          \\ \hline
+        Takeoff Field Length                  & 10,500 ft                        \\ \hline
+        Landing Approach Speed                & 140 kts                          \\ \hline
         \rowcolor[HTML]{C0C0C0}
-        Fuel Destination Payload              & 0\%                              \\ \hline
-        Cruise Mach Number                    & 0.80                             \\ \hline
+        Fuel Destination Payload              & 35\%                             \\ \hline
+        Cruise Mach Number                    & 0.85                             \\ \hline
         \rowcolor[HTML]{C0C0C0}
         Initial Cruise Altitude               & 35,000 ft                        \\ \hline
-    \end{tabular}
+        \end{tabular}
+        \quad
+        \begin{tabular}{|c|c|}
+            \hline
+            \rowcolor[HTML]{DAE8FC}
+            \multicolumn{2}{|c|}{\cellcolor[HTML]{DAE8FC}\textbf{One-stop Aircraft}} \\ \hline
+            \textbf{Design Specification:}        & \textbf{Parameter Value:}        \\ \hline
+            Number of Passangers                  & 225                              \\ \hline
+            \rowcolor[HTML]{C0C0C0}
+            Weight of Cargo                       & 3,000 lbs                        \\ \hline
+            Still Air Range                       & 3,700 nmi                        \\ \hline
+            \rowcolor[HTML]{C0C0C0}
+            Takeoff Field Length                  & 6,000 ft                         \\ \hline
+            Landing Approach Speed                & 130 kts                          \\ \hline
+            \rowcolor[HTML]{C0C0C0}
+            Fuel Destination Payload              & 0\%                              \\ \hline
+            Cruise Mach Number                    & 0.80                             \\ \hline
+            \rowcolor[HTML]{C0C0C0}
+            Initial Cruise Altitude               & 35,000 ft                        \\ \hline
+        \end{tabular}
+        \caption{Given Design Specifications.}
     \end{table}
 
     \section{Design Analysis}
@@ -126,14 +137,14 @@
             total of 1800 discrete aircraft designs. All aircraft deisgns in
             this analysis utilized two JT9D engines and had one aisle with six
             abreast for the seating configuration.
+        \end{flushleft}
 
-            \begin{figure*}[ht]
-                \centering
-                \includegraphics[scale=0.54]{DOCTM v Sweep Angle.PNG}
-                \caption{Direct operating cost, per ton, per mile plotted against aspect ratio for the non-stop and one-stop aircraft at different wing sweep angles.}
-                \label{fig:doctmAR}
-            \end{figure*}
+        \begin{center}
+            \includegraphics[scale=0.50]{DOCTM v Sweep Angle.PNG}
+            \captionof{figure}{Direct operating cost, per ton, per mile plotted against aspect ratio for the non-stop and one-stop aircraft at different wing sweep angles.}\label{fig:doctmAR}%      only if needed
+        \end{center}
 
+        \begin{flushleft}
             From figure \ref{fig:doctmAR}, the optimized aspect ratio can be
             determined by finding the range at which the minimum value occurs.
             Due to the number of unique aircraft designs considered in this
@@ -141,14 +152,14 @@
             \ref{fig:doctmAR}. The nonstop aircraft plot is zoomed in on the 7.0
             to 8.2 aspect ratio range and the onestop aircraft plot is zoomed in
             on the 9.0 to 10.2 aspect ratio range.
+        \end{flushleft}
 
-            \begin{figure*}[ht]
-                \centering
-                \includegraphics[scale=0.244]{DOCTM v Sweep Angle Zoom.PNG}
-                \caption{Zoom of the direct operating cost, per ton, per mile plotted against aspect ratio for the non-stop and one-stop aircraft at different wing sweep angles.}
-                \label{fig:doctmARzoom}
-            \end{figure*}
+        \begin{center}
+            \includegraphics[scale=0.244]{DOCTM v Sweep Angle Zoom.PNG}
+            \captionof{figure}{Zoom of the direct operating cost, per ton, per mile plotted against aspect ratio for the non-stop and one-stop aircraft at different wing sweep angles.}\label{fig:doctmARzoom}%      only if needed
+        \end{center}
 
+        \begin{flushleft}
             From this analysis, it is evident that for the non-stop aircraft,
             the optimized aspect ratio is 7.9 with a wing swep angle of 37
             degrees. For the one-stop aircraft, the optimized aspect ratio is
@@ -156,33 +167,37 @@
             direct operating cost, per ton, per mile of \$0.1064 and \$0.1026
             for the onestop and nonstop aircraft respectively. The rest of the
             sections within section \ref{sec:design} will be based off of the
-            control values found herein this section.
+            control values found in this section of the report, using
+            conventional technology and a seating configuration of one aisle and
+            six seats abreast.
         \end{flushleft}
 
+    %\pagebreak
     \subsection{Weight versus Aspect Ratio and Wing Sweep Angle}
     \label{sec:weight}
         \begin{flushleft}
             Now that the most effiecnt plane in terms of cost to operate has
-            been found, it is of interest to look at the weight of the aircraft
-            and also the amount of fuel that is burned during flight. Figure
-            \ref{fig:AR} plots the takeoff weight of the aircraft in pound versus the
-            aspect ratio using fixed lines of sweep angle. The plots in this
-            figure show a much more dramatic divergence from the optimum value
-            than the direct operating cost plots. The minimum weight values
-            occur near the range of aspect ratios for the lowest direct
+            been found, it is of interest to look at the weight of each discrete
+            aircraft design generated in section \ref{sec:AR}. Figure
+            \ref{fig:AR} plots the takeoff weight of the aircraft in pounds
+            versus the aspect ratio using fixed lines of sweep angle. The plots
+            in this figure show a much more dramatic divergence from the optimum
+            value than the direct operating cost plots. The minimum weight
+            values occur near the range of aspect ratios for the lowest direct
             operating cost.
-
-            \begin{figure*}[ht]
-                \centering
-                \includegraphics[scale=0.54]{Weight v Sweep Angle.PNG}
-                \caption{Direct operating cost, per ton, per mile plotted against sweep angle for the non-stop and one-stop aircraft at the optimized aspect ratios.}
-                \label{fig:AR}
-            \end{figure*}
-
-            A large fraction of the weight of the aircraft comes in the form of the weight of fuel required to make the distance.
-
         \end{flushleft}
 
+        \begin{center}
+            \includegraphics[scale=0.5]{Weight v Sweep Angle.PNG}
+            \captionof{figure}{Aircraft takeoff weight plotted against sweep angle for the non-stop and one-stop aircraft at the optimized aspect ratios.}\label{fig:AR}
+        \end{center}
+
+        \begin{flushleft}
+            A large fraction of the weight of the aircraft comes in the form of the weight of fuel required to make the distance.
+        \end{flushleft}
+
+
+    %\pagebreak
     \subsection{Advanced Technology}
     \label{sec:adv_tech}
         \begin{flushleft}
@@ -218,26 +233,23 @@
             section \ref{sec:AR}, with the implementation of different
             technology improvements. Figure \ref{fig:weight} plots the takeoff weight of
             the aircraft with different technologies.
+        \end{flushleft}
 
-            \begin{figure*}[ht]
-                \centering
-                \includegraphics[scale=0.7]{tech.PNG}
-                \caption{Direct operating cost, per ton, per mile for the optimal aircraft configration using different technologies.}
-                \label{fig:doc}
-            \end{figure*}
+        \begin{center}
+            \includegraphics[scale=0.7]{tech.PNG}
+            \captionof{figure}{Direct operating cost, per ton, per mile for the optimal aircraft configration using different technologies.}\label{fig:doc}
+        \end{center}
 
-            \begin{figure*}[ht]
-                \centering
-                \includegraphics[scale=0.7]{tech_weight.PNG}
-                \caption{Takeoff Weight for the optimal aircraft configration using different technologies.}
-                \label{fig:weight}
-            \end{figure*}
+        \begin{center}
+            \includegraphics[scale=0.7]{tech_weight.PNG}
+            \captionof{figure}{Takeoff Weight for the optimal aircraft configration using different technologies.}\label{fig:weight}
+        \end{center}
 
+        \begin{flushleft}
             It is clear that both technologies, supercritical airfoils and
             composite strucutres, reduce the direct operating cost. Using them
             together drives down the operating cost and weight of the aircraft
             dramaticaly.
-
         \end{flushleft}
 
     \subsection{Aircraft Seat Configuration}
@@ -251,14 +263,14 @@
             has been applied to the aircraft design. In the previous sections, the
             standard configuration of one aisle and six passangers abreast
             was considered. These results are plotted in figure \ref{fig:seats}.
+        \end{flushleft}
 
-            \begin{figure*}[ht]
-                \centering
-                \includegraphics[scale=0.7]{seating.PNG}
-                \caption{Direct operating cost, per ton, per mile for the optimal aircraft configration using different seating configurations.}
-                \label{fig:seats}
-            \end{figure*}
+        \begin{center}
+            \includegraphics[scale=0.7]{seating.PNG}
+            \captionof{figure}{Direct operating cost, per ton, per mile for the optimal aircraft configration using different seating configurations.}\label{fig:seats}
+        \end{center}
 
+        \begin{flushleft}
             From this study, it is evident that when holding the number of
             aisles constant, increasing the number of passangers abreast leads
             to a higher direct operating cost. Additionaly, it is clear that the
@@ -274,11 +286,31 @@
             found in this study. The increased loading and unloading efficnecy
             was not taken into account in the direct operating cost estimation
             used in this study.
-
         \end{flushleft}
 
 
-    \pagebreak
+    \subsection{Number of Engines}
+    \label{sec:engine}
+        \begin{flushleft}
+            The final design consideration was the number of engines. Figure
+            \ref{fig:engine} plots the direct operating cost for a 1 asile, 6
+            abreast airplane using the optimized aspect ratio and wing sweep
+            angle, with both advanced technologies applied. It is clear from the
+            plot that increasing the number of engines dropped the direct
+            operating cost; for the nonstop aircraft, the optimum number of
+            engines was three in terms of the direct operating cost. As with the
+            other sections of the report, increasing the number of engines will
+            increase the initial procrument cost, which was not considered in
+            the direct operating cost calculation.
+        \end{flushleft}
+
+        \begin{center}
+            \includegraphics[scale=0.7]{engines.PNG}
+            \captionof{figure}{Direct operating cost, per ton, per mile for the optimal aircraft configuration, using 1 aisle and 6 abreast, with different engine count.}\label{fig:engine}%      only if needed
+        \end{center}
+
+
+    %\pagebreak
     \section{Summary and Conclusion}
     \label{sec:conclusion}
         \begin{flushleft}
@@ -289,58 +321,117 @@
         \end{flushleft}
     \subsection{Final Aircraft Design Specifications}
     \label{sec:optimized}
-        \begin{flushleft}
-            The table below lists the final optimized specifications of the non-stop and one-stop aircraft.
 
-            \begin{table}[ht]
-                \begin{tabular}{|c|c|}
+        \begin{flushleft}
+            The table below lists the final optimized specifications of the
+            non-stop and one-stop aircraft.
+        \end{flushleft}
+
+        \begin{table}[ht]
+            \begin{tabular}{|c|c|}
                 \hline
                 \rowcolor[HTML]{FFC702}
                 \multicolumn{2}{|c|}{\cellcolor[HTML]{FFC702}\textbf{Non-stop Aircraft}} \\ \hline
-                \textbf{Design Specification:}        & \textbf{Parameter Value:}        \\ \hline
-                Number of Passangers                  & 225                              \\ \hline
+                \textbf{Specification:}            & \textbf{Optimized Value:}           \\ \hline
+                Sweep                              & 37 deg                              \\ \hline
                 \rowcolor[HTML]{C0C0C0}
-                Weight of Cargo                       & 6,000 lbs                        \\ \hline
-                Still Air Range                       & 7,400 nmi                        \\ \hline
+                Aspect Ratio                       & 7.9                                 \\ \hline
+                \rowcolor[HTML]{FFFFFF}
+                Airfoil Type                       & Supercritical                       \\ \hline
                 \rowcolor[HTML]{C0C0C0}
-                Takeoff Field Length                  & 10,500 ft                        \\ \hline
-                Landing Approach Speed                & 140 kts                          \\ \hline
+                Wing Area                          & 2196 ft                             \\ \hline
+                \rowcolor[HTML]{FFFFFF}
+                Wing Span                          & 132 ft                              \\ \hline
                 \rowcolor[HTML]{C0C0C0}
-                Fuel Destination Payload              & 35\%                             \\ \hline
-                Cruise Mach Number                    & 0.85                             \\ \hline
+                Number of Aisles                   & 1                                   \\ \hline
+                \rowcolor[HTML]{FFFFFF}
+                Number of Seats Abreast            & 6                                   \\ \hline
                 \rowcolor[HTML]{C0C0C0}
-                Initial Cruise Altitude               & 35,000 ft                        \\ \hline
-                \end{tabular}
-                \quad
-                \begin{tabular}{|c|c|}
-                    \hline
-                    \rowcolor[HTML]{DAE8FC}
-                    \multicolumn{2}{|c|}{\cellcolor[HTML]{DAE8FC}\textbf{One-stop Aircraft}} \\ \hline
-                    \textbf{Design Specification:}        & \textbf{Parameter Value:}        \\ \hline
-                    Number of Passangers                  & 225                              \\ \hline
-                    \rowcolor[HTML]{C0C0C0}
-                    Weight of Cargo                       & 3,000 lbs                        \\ \hline
-                    Still Air Range                       & 3,700 nmi                        \\ \hline
-                    \rowcolor[HTML]{C0C0C0}
-                    Takeoff Field Length                  & 6,000 ft                         \\ \hline
-                    Landing Approach Speed                & 130 kts                          \\ \hline
-                    \rowcolor[HTML]{C0C0C0}
-                    Fuel Destination Payload              & 0\%                              \\ \hline
-                    Cruise Mach Number                    & 0.80                             \\ \hline
-                    \rowcolor[HTML]{C0C0C0}
-                    Initial Cruise Altitude               & 35,000 ft                        \\ \hline
-                \end{tabular}
-                \end{table}
+                Fuselage Diameter                  & 14.4 ft                             \\ \hline
+                \rowcolor[HTML]{FFFFFF}
+                Fuselage Length                    & 191 ft                              \\ \hline
+                \rowcolor[HTML]{C0C0C0}
+                Number of Engines                  & 4                                   \\ \hline
+                \rowcolor[HTML]{FFFFFF}
+                Structure Type                     & Composite                           \\ \hline
+                \rowcolor[HTML]{C0C0C0}
+                Takeoff Weight                     & 330085 lbs                          \\ \hline
+                \rowcolor[HTML]{FFFFFF}
+                Fuel Weight                        & 130591 lbs                           \\ \hline
+                \rowcolor[HTML]{C0C0C0}
+                DOC                                & 0.071 \$/ton/mile                   \\ \hline
+            \end{tabular}
+            \quad
+            \begin{tabular}{|c|c|}
+                \hline
+                \rowcolor[HTML]{DAE8FC}
+                \multicolumn{2}{|c|}{\cellcolor[HTML]{DAE8FC}\textbf{One-stop Aircraft}} \\ \hline
+                \textbf{Specification:}            & \textbf{Optimized Value:}           \\ \hline
+                Sweep                              & 31 deg                              \\ \hline
+                \rowcolor[HTML]{C0C0C0}
+                Aspect Ratio                       & 9.5                                 \\ \hline
+                \rowcolor[HTML]{FFFFFF}
+                Airfoil Type                       & Supercritical                       \\ \hline
+                \rowcolor[HTML]{C0C0C0}
+                Wing Area                          & 2052 ft                             \\ \hline
+                \rowcolor[HTML]{FFFFFF}
+                Wing Span                          & 139 ft                              \\ \hline
+                \rowcolor[HTML]{C0C0C0}
+                Number of Aisles                   & 2                                   \\ \hline
+                \rowcolor[HTML]{FFFFFF}
+                Number of Seats Abreast            & 6                                   \\ \hline
+                \rowcolor[HTML]{C0C0C0}
+                Fuselage Diameter                  & 14.7 ft                             \\ \hline
+                \rowcolor[HTML]{FFFFFF}
+                Fuselage Length                    & 174 ft                              \\ \hline
+                \rowcolor[HTML]{C0C0C0}
+                Number of Engines                  & 2                                   \\ \hline
+                \rowcolor[HTML]{FFFFFF}
+                Structure Type                     & Composite                           \\ \hline
+                \rowcolor[HTML]{C0C0C0}
+                Takeoff Weight                     & 299275 lbs                          \\ \hline
+                \rowcolor[HTML]{FFFFFF}
+                Fuel Weight                        & 91869 lbs                           \\ \hline
+                \rowcolor[HTML]{C0C0C0}
+                DOC                                & 0.085 \$/ton/mile                   \\ \hline
+            \end{tabular}
+        \caption{Final aircraft sizing specifications.}
+        \end{table}
 
-        \end{flushleft}
+
 
     \subsection{Payload Range}
     \label{sec:PR}
+    \begin{flushleft}
+        This section shows the payload range chart. This chart plots the range
+        for each optimized aircraft can fly given varying payloads.
+    \end{flushleft}
 
-    \subsection{Recommendations Customer Selection and Beyond}
+    \begin{center}
+        \includegraphics[scale=0.8]{Payload Range.PNG}
+        \captionof{figure}{Payload range plotted against the range.}\label{fig:PR}
+    \end{center}
+
+    \subsection{Recommendations}
     \label{sec:Recommendations}
         \begin{flushleft}
+            The final aircraft deisgn specifications were chosen based on
+            optimizing the minimum direct operating cost, providing appealing
+            options for the customers needs, and creating a safe aircraft. The
+            non-stop aircraft utilized four engines to minimize the direct
+            operating cost and increase redundancy in case one of the engines
+            failed on the long flight. The one-stop aircraft utilized only two
+            engines, but used a two aisle seating configuration. This
+            configuration was chosen for the smaller airplane for its ability to
+            load and unload passangers more quickly, thus decreasing the idle
+            time at airports and increasing the maximum number of flights than
+            may be conducted on a given day.
 
+            For long flights, the non-stop aircraft presents the better option.
+            It uses less fuel to reach the destination than two of the one-stop
+            flights (130591 lbs of fuel versus 183738 lbs of fuel). Aditionally,
+            the long range aircraft is able to carry more cargo and has the
+            lower direct operating cost, per ton, per mile.
         \end{flushleft}
 
 

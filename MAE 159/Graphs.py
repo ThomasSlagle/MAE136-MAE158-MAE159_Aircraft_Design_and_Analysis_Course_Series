@@ -214,6 +214,32 @@ onestop_doctm_4e = 0.07739057954920024
 nonstop_doctm_3e = 0.06863654876850053
 onestop_doctm_3e = 0.07894583050396861
 
+fig6 = fig6, (ax1, ax2) = plt.subplots(1,2, figsize = (8,4))
+
+ax1.scatter([1,2,3],[nonstop_doctm_com,nonstop_doctm_3e,nonstop_doctm_4e])
+ax2.scatter([1,2,3],[onestop_doctm_com,onestop_doctm_3e,onestop_doctm_4e],color = '#ff7f0e')
+
+ax1.annotate('2 Engines',xy = (1+0.1,nonstop_doctm_com),fontsize=7.5)
+ax1.annotate('3 Engines',xy = (2+0.1,nonstop_doctm_3e),fontsize=7.5)
+ax1.annotate('4 Engines',xy = (2+0.5,nonstop_doctm_4e-0.0005),fontsize=7.5)
+
+
+ax2.annotate('2 Engines',xy = (1+0.1,onestop_doctm_com),fontsize=7.5)
+ax2.annotate('3 Engines',xy = (2+0.1,onestop_doctm_3e),fontsize=7.5)
+ax2.annotate('4 Engines',xy = (2+0.5,onestop_doctm_4e-0.0005),fontsize=7.5)
+
+ax1.set_title('Non-stop Aircraft', fontsize = 14)
+ax2.set_title('One-stop Aircraft', fontsize = 14)
+ax1.set_ylabel('DOC per Ton per Mile ($)', fontsize=14)
+
+#ax1.set_ylim([0.072,0.080])
+#ax2.set_ylim([0.080,0.094])
+
+ax1.get_xaxis().set_visible(False)
+ax2.get_xaxis().set_visible(False)
+plt.savefig(r'MAE 159\Other data\Images\engines.png')
+plt.close()
+
 
 
 
