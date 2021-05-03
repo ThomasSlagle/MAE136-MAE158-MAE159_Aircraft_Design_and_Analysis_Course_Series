@@ -40,8 +40,8 @@
         This report consists of a study on the cost and performance optimization
         for two subsoinc commercial transport aircraft, one non-stop aircraft
         and one one-stop aircraft. Herein, the reader will find a summary of the
-        methods used and the data generated from an itterative python script
-        which uses standard, well-defined aircraft deisgn methods to exactly
+        methods used and the data generated from an iterative python script
+        which uses standard, well-defined aircraft design methods to exactly
         meet the design specifications. Various parameters, including the aspect
         ratio, the airfoil type, the wing sweep angle, and the seating
         configuration, were systematically varied to determine the optimum
@@ -56,8 +56,8 @@
     \begin{flushleft}
         As mentioned prior, two aircraft with distinct given design
         requirements, were considered in this design study. Both aircraft are
-        requried to carry 225 passangers and complete a 7400 nautical mile
-        journey. The first larger aircraft must compelte the journey without any
+        required to carry 225 passengers and complete a 7400 nautical mile
+        journey. The first larger aircraft must complete the journey without any
         stops. The second smaller aircraft must complete the journey with
         one-stop, giving the airplane a required range of 3700 nautical miles.
         The complete set of given design specifications are listed in tables 1
@@ -71,7 +71,7 @@
         \rowcolor[HTML]{FFC702}
         \multicolumn{2}{|c|}{\cellcolor[HTML]{FFC702}\textbf{Non-stop Aircraft}} \\ \hline
         \textbf{Design Specification:}        & \textbf{Parameter Value:}        \\ \hline
-        Number of Passangers                  & 225                              \\ \hline
+        Number of Passengers                  & 225                              \\ \hline
         \rowcolor[HTML]{C0C0C0}
         Weight of Cargo                       & 6,000 lbs                        \\ \hline
         Still Air Range                       & 7,400 nmi                        \\ \hline
@@ -90,7 +90,7 @@
             \rowcolor[HTML]{DAE8FC}
             \multicolumn{2}{|c|}{\cellcolor[HTML]{DAE8FC}\textbf{One-stop Aircraft}} \\ \hline
             \textbf{Design Specification:}        & \textbf{Parameter Value:}        \\ \hline
-            Number of Passangers                  & 225                              \\ \hline
+            Number of Passengers                  & 225                              \\ \hline
             \rowcolor[HTML]{C0C0C0}
             Weight of Cargo                       & 3,000 lbs                        \\ \hline
             Still Air Range                       & 3,700 nmi                        \\ \hline
@@ -111,30 +111,30 @@
     \begin{flushleft}
         The object of this section is to perform an analysis for both aircraft
         and determine the optimized specifications for the design parameters. An
-        itterative python script was developed with allowable user input for
+        iterative python script was developed with allowable user input for
         user-selectable design parameters to make calculations of direct
-        operating cost (DOC), weight, drag, and other airfact performance
-        charactersitics easy, fast, and repeatable.
+        operating cost (DOC), weight, drag, and other aircraft performance
+        characteristics easy, fast, and repeatable.
     \end{flushleft}
 
     \subsection{Direct Operating Cost versus Aspect Ratio and Wing Sweep Angle}
     \label{sec:AR}
         \begin{flushleft}
-            The aspect ratio describes the ratio of the airfact's wingspan to
+            The aspect ratio describes the ratio of the aircraft's wingspan to
             its mean aerodynamic chord length. A small aspect ratio describes a
             short and wide wing whereas a larger aspect ratio describes a long
-            and narrow wing planform. The wing aspect ratio is an important
-            factor in determing the available lift of the aircraft, the weight
+            and narrow wing planform (1). The wing aspect ratio is an important
+            factor in determining the available lift of the aircraft, the weight
             of the aircraft, and the induced drag during flight. For a typical
             jet transport aircraft, Schaufele gives an aspect ratio range of 7.0
-            to 9.5, as such, this formed the basis for design selection. Aspect
+            to 9.5 (3), as such, this formed the basis for design selection. Aspect
             ratios in steps of 0.1 were considered from 6.0 to 12.0 during this
             study. The method for comparison will be the resulting DOC per
-            passanger, per mile. Figure \ref{fig:doctmAR} shows the aspect ratio
+            passenger, per mile. Figure \ref{fig:doctmAR} shows the aspect ratio
             versus the DOC with curves of fixed sweep angle for both the short
             range and long range aircraft. The fixed sweep angle curves are
             shown in steps of 1 degree. Each plot in \ref{fig:doctmAR} shows a
-            total of 1800 discrete aircraft designs. All aircraft deisgns in
+            total of 1800 discrete aircraft designs. All aircraft designs in
             this analysis utilized two JT9D engines and had one aisle with six
             abreast for the seating configuration.
         \end{flushleft}
@@ -150,7 +150,7 @@
             Due to the number of unique aircraft designs considered in this
             section of the study, a zoomed in version is presented in
             \ref{fig:doctmAR}. The nonstop aircraft plot is zoomed in on the 7.0
-            to 8.2 aspect ratio range and the onestop aircraft plot is zoomed in
+            to 8.2 aspect ratio range and the one-stop aircraft plot is zoomed in
             on the 9.0 to 10.2 aspect ratio range.
         \end{flushleft}
 
@@ -161,11 +161,11 @@
 
         \begin{flushleft}
             From this analysis, it is evident that for the non-stop aircraft,
-            the optimized aspect ratio is 7.9 with a wing swep angle of 37
+            the optimized aspect ratio is 7.9 with a wing sweep angle of 37
             degrees. For the one-stop aircraft, the optimized aspect ratio is
             9.5 with a wing sweep angle of 31 degrees. This corresponds to a
             direct operating cost, per ton, per mile of \$0.1064 and \$0.1026
-            for the onestop and nonstop aircraft respectively. The rest of the
+            for the one-stop and nonstop aircraft respectively. The rest of the
             sections within section \ref{sec:design} will be based off of the
             control values found in this section of the report, using
             conventional technology and a seating configuration of one aisle and
@@ -176,7 +176,7 @@
     \subsection{Weight versus Aspect Ratio and Wing Sweep Angle}
     \label{sec:weight}
         \begin{flushleft}
-            Now that the most effiecnt plane in terms of cost to operate has
+            Now that the most efficient plane in terms of cost to operate has
             been found, it is of interest to look at the weight of each discrete
             aircraft design generated in section \ref{sec:AR}. Figure
             \ref{fig:AR} plots the takeoff weight of the aircraft in pounds
@@ -207,9 +207,9 @@
             airfoil selection, the advent of supercritical airfoils has been
             cited to improve aircraft fuel efficiency and thus lower the direct
             operating cost of the aircraft. The Boeing 757 and 767, developed
-            during the 1980s were some of the first commerical aircraft to use
-            this technology. However, these airfoils types are comprised of more
-            complciated compund curves which presents added complexity in the
+            during the 1980s were some of the first commercial aircraft to use
+            this technology (2). However, these airfoils types are comprised of more
+            complicated compound curves which presents added complexity in the
             manufacturing process, driving up initial cost of the aircraft
             however, the decrease in operational costs of the aircraft exceeds
             the initial procurement cost increase of the aircraft.
@@ -221,12 +221,12 @@
             advancements in materials engineering has allowed for reliable
             implementation of composite layups, which are lighter and stronger
             than the aluminum alternative. However, the process to form
-            strucutres from composites is complicated and if not performed
-            properly, the composite sturcutres may exhibit delamination.
+            structures from composites is complicated and if not performed
+            properly, the composite structures may exhibit delamination.
             Performing the process correctly is expensive and time consuming,
-            thus driving up the initial procrument costs of the aircraft using
+            thus driving up the initial procurement costs of the aircraft using
             this technology. However, the savings in direct operating costs may
-            offset this initial procrument price.
+            offset this initial procurement price.
 
             Figure \ref{fig:doc} plots the direct operating cost of the aircraft
             using the optimized aspect ratio and wing sweep angle found in
@@ -237,19 +237,19 @@
 
         \begin{center}
             \includegraphics[scale=0.7]{tech.PNG}
-            \captionof{figure}{Direct operating cost, per ton, per mile for the optimal aircraft configration using different technologies.}\label{fig:doc}
+            \captionof{figure}{Direct operating cost, per ton, per mile for the optimal aircraft configuration using different technologies.}\label{fig:doc}
         \end{center}
 
         \begin{center}
             \includegraphics[scale=0.7]{tech_weight.PNG}
-            \captionof{figure}{Takeoff Weight for the optimal aircraft configration using different technologies.}\label{fig:weight}
+            \captionof{figure}{Takeoff Weight for the optimal aircraft configuration using different technologies.}\label{fig:weight}
         \end{center}
 
         \begin{flushleft}
             It is clear that both technologies, supercritical airfoils and
-            composite strucutres, reduce the direct operating cost. Using them
+            composite structures, reduce the direct operating cost. Using them
             together drives down the operating cost and weight of the aircraft
-            dramaticaly.
+            dramatically.
         \end{flushleft}
 
     \subsection{Aircraft Seat Configuration}
@@ -261,29 +261,29 @@
             direct operating cost. For this study, the optimized aspect ratio
             and both supercritical airfoil technology and composite technology
             has been applied to the aircraft design. In the previous sections, the
-            standard configuration of one aisle and six passangers abreast
+            standard configuration of one aisle and six passengers abreast
             was considered. These results are plotted in figure \ref{fig:seats}.
         \end{flushleft}
 
         \begin{center}
             \includegraphics[scale=0.7]{seating.PNG}
-            \captionof{figure}{Direct operating cost, per ton, per mile for the optimal aircraft configration using different seating configurations.}\label{fig:seats}
+            \captionof{figure}{Direct operating cost, per ton, per mile for the optimal aircraft configuration using different seating configurations.}\label{fig:seats}
         \end{center}
 
         \begin{flushleft}
             From this study, it is evident that when holding the number of
-            aisles constant, increasing the number of passangers abreast leads
-            to a higher direct operating cost. Additionaly, it is clear that the
-            one asile, six abreast configuration had a lower direct operaing
+            aisles constant, increasing the number of passengers abreast leads
+            to a higher direct operating cost. Additionally, it is clear that the
+            one aisle, six abreast configuration had a lower direct operating
             cost for both aircraft than any of the two aisle configurations.
             However, the two aisle configuration has been found to have an
-            advantage over a one aisle configuration in the fact that passangers
+            advantage over a one aisle configuration in the fact that passengers
             are able to load and unload from the aircraft more quickly,
-            signifigantly reducing the down time requried when at the airports.
+            significantly reducing the down time required when at the airports.
             For aircraft that may be making shorter flights, such as the
             one-stop aircraft in this study, it may be more beneficial to use
             the two-aisle configuration despite the higher direct operating cost
-            found in this study. The increased loading and unloading efficnecy
+            found in this study. The increased loading and unloading efficiency
             was not taken into account in the direct operating cost estimation
             used in this study.
         \end{flushleft}
@@ -293,14 +293,14 @@
     \label{sec:engine}
         \begin{flushleft}
             The final design consideration was the number of engines. Figure
-            \ref{fig:engine} plots the direct operating cost for a 1 asile, 6
+            \ref{fig:engine} plots the direct operating cost for a 1 aisle, 6
             abreast airplane using the optimized aspect ratio and wing sweep
             angle, with both advanced technologies applied. It is clear from the
             plot that increasing the number of engines dropped the direct
             operating cost; for the nonstop aircraft, the optimum number of
             engines was three in terms of the direct operating cost. As with the
             other sections of the report, increasing the number of engines will
-            increase the initial procrument cost, which was not considered in
+            increase the initial procurement cost, which was not considered in
             the direct operating cost calculation.
         \end{flushleft}
 
@@ -339,7 +339,7 @@
                 \rowcolor[HTML]{FFFFFF}
                 Airfoil Type                       & Supercritical                       \\ \hline
                 \rowcolor[HTML]{C0C0C0}
-                Wing Area                          & 2196 ft                             \\ \hline
+                Wing Area                          & 2196 ft$^2$                             \\ \hline
                 \rowcolor[HTML]{FFFFFF}
                 Wing Span                          & 132 ft                              \\ \hline
                 \rowcolor[HTML]{C0C0C0}
@@ -373,7 +373,7 @@
                 \rowcolor[HTML]{FFFFFF}
                 Airfoil Type                       & Supercritical                       \\ \hline
                 \rowcolor[HTML]{C0C0C0}
-                Wing Area                          & 2052 ft                             \\ \hline
+                Wing Area                          & 2052 ft$^2$                             \\ \hline
                 \rowcolor[HTML]{FFFFFF}
                 Wing Span                          & 139 ft                              \\ \hline
                 \rowcolor[HTML]{C0C0C0}
@@ -415,7 +415,7 @@
     \subsection{Recommendations}
     \label{sec:Recommendations}
         \begin{flushleft}
-            The final aircraft deisgn specifications were chosen based on
+            The final aircraft design specifications were chosen based on
             optimizing the minimum direct operating cost, providing appealing
             options for the customers needs, and creating a safe aircraft. The
             non-stop aircraft utilized four engines to minimize the direct
@@ -423,16 +423,26 @@
             failed on the long flight. The one-stop aircraft utilized only two
             engines, but used a two aisle seating configuration. This
             configuration was chosen for the smaller airplane for its ability to
-            load and unload passangers more quickly, thus decreasing the idle
+            load and unload passengers more quickly, thus decreasing the idle
             time at airports and increasing the maximum number of flights than
             may be conducted on a given day.
 
             For long flights, the non-stop aircraft presents the better option.
             It uses less fuel to reach the destination than two of the one-stop
-            flights (130591 lbs of fuel versus 183738 lbs of fuel). Aditionally,
+            flights (130591 lbs of fuel versus 183738 lbs of fuel). Additionally,
             the long range aircraft is able to carry more cargo and has the
             lower direct operating cost, per ton, per mile.
         \end{flushleft}
 
+    \pagebreak
+    \section{References}
+        \begin{flushleft}
+            \begin{enumerate}
+                \item Hall, Nancy. (2018). Wing Geometry Definitions. NASA Glenn Research Center.
+                \item Roeseler, W. G., et al. (2007). Composite Structures: The First 100 Years. 16TH INTERNATIONAL CONFERENCE ON COMPOSITE MATERIALS.
+                \item Schaufele, R. D. (2007). The Elements of Aircraft Preliminary Design. Santa Ana, CA: ARIES Publication.
+                \item Shevell, R. S. (1983). Fundamentals of flight. Englewood Cliffs, NJ: Prentice-Hall.
+            \end{enumerate}
+        \end{flushleft}
 
 \end{document}
