@@ -72,25 +72,25 @@ axx1.set_prop_cycle('color', colors)
 axx2.set_prop_cycle('color', colors)
 
 for i in range(len(array_doctm_ar_nonstop)):
-       axx1.scatter(ar_array, array_doctm_ar_nonstop[i], label=('Sweep Angle: ' + str(10+i)))
-axx1.scatter(ar_array, nonstop_tm_40_sweep, label='Sweep Angle: 40')
+       axx1.plot(ar_array, array_doctm_ar_nonstop[i], label=('Sweep Angle: ' + str(10+i)),marker='.',markersize = 10)
+axx1.plot(ar_array, nonstop_tm_40_sweep, label='Sweep Angle: 40',marker='.',markersize = 10)
 axx1.set_xlabel('Aspect Ratio', fontsize=14)
 axx1.set_ylabel('DOC per Ton per Mile ($)', fontsize=14)
 
 
 for i in range(len(array_doctm_ar_onestop)):
-       axx2.scatter(ar_array, array_doctm_ar_onestop[i], label=('Sweep Angle: ' + str(10+i)))
-axx2.scatter(ar_array, onestop_tm_40_sweep, label='Sweep Angle: 40')
+       axx2.plot(ar_array, array_doctm_ar_onestop[i], label=('Sweep Angle: ' + str(10+i)),marker='.',markersize = 10)
+axx2.plot(ar_array, onestop_tm_40_sweep, label='Sweep Angle: 40',marker='.',markersize = 10)
 axx2.set_xlabel('Aspect Ratio', fontsize=14)
 
 axx2.legend(loc = 'lower center', bbox_to_anchor=(0,0,1,1),bbox_transform = plt.gcf().transFigure, ncol = 8, fontsize=6)
 axx1.set_title('Non-stop Aircraft', fontsize = 14)
 axx2.set_title('One-stop Aircraft', fontsize = 14)
 
-plt.savefig(r'MAE 159\Other data\Images\DOCTM v Sweep Angle.png')
-#plt.show()
+#plt.savefig(r'MAE 159\Other data\Images\DOCTM v Sweep Angle.png')
+plt.show()
 plt.close()
-
+exit()
 
 
 nonstop_w_conv = (array_w_ar_nonstop[np.where(sweep_array == 37)]).flatten()[np.where(ar_array == find_nearest(ar_array,7.9))]

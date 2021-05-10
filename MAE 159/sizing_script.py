@@ -28,7 +28,7 @@ if (mission_type == 1):
     M_cruise = 0.85
     h_cruise_i = 35000. #ft
     fuel_remaning = 0.35
-    num_e = 4#int(input("num_e:")) #2
+    num_e = 2#int(input("num_e:")) #2
     class3 = 1
 
     num_abreast = 6
@@ -48,7 +48,7 @@ elif (mission_type == 2):
     v_approach = 130 #kts       #PL +35% max fuel
     M_cruise = 0.80
     h_cruise_i = 35000. #ft
-    fuel_remaning = 0
+    fuel_remaning = 1
     num_e = 2#int(input("num_e:")) #2
     class3 = 0
 
@@ -73,6 +73,8 @@ elif (mission_type == 3):
     class3 = 1
     ar = 8
     sweep = 35
+    num_abreast = 8
+    num_aisles = 2
     #break
 
 elif (mission_type == 4):
@@ -84,10 +86,13 @@ elif (mission_type == 4):
     M_cruise = 0.80
     h_cruise_i = 35000. #ft
     fuel_remaning = 0.35
-    num_e = 2
+    num_e = 4
     class3 = 0
     ar = 7.1
     sweep = 30.5
+
+    num_abreast = 5
+    num_aisles = 1
     #break
 
 else:
@@ -225,6 +230,7 @@ while (T_r_jt9d_2 > 10000):
                 #fig 4 for wf/wto
                 #JT9D to JT8D
                 wf_wto = 1.04*dgp.order_3rd(R_allout, dgp.coef_4)*0.61/0.78 + adjust
+                #print(wf_wto)
             else:
                 wf_wto = dgp.order_3rd(R_allout, dgp.coef_4) + adjust
 
@@ -277,7 +283,31 @@ while (T_r_jt9d_2 > 10000):
         #print(wt_7vstall)
         #print(dgp.linear(M_lo, dgp.coef_JT9D))
         #print(dgp.linear(0, dgp.coef_JT9D))
-        wt = wt_7vstall * dgp.linear(M_lo, dgp.coef_JT9D)/dgp.linear(0, dgp.coef_JT9D) + adj_w
+
+
+
+        #wt = wt_7vstall * dgp.linear(M_lo, dgp.coef_JT9D)/dgp.linear(0, dgp.coef_JT9D) + adj_w
+
+
+        #FIXED W/T SECTION!!!!!!!!
+
+
+
+
+
+
+
+        if (M_lo >= 0 and M_lo <= 0.15):
+            thrust_ratio = 45500*((0.15-M_lo)/(0.15-0)) + 39120*(1-(0.15-M_lo)/(0.15-0))
+        elif (M_lo > 0.15 and M_lo <= 0.30):
+            thrust_ratio = 39120*((0.30-M_lo)/(0.30-0.15)) + 34820*(1-(0.30-M_lo)/(0.30-0.15))
+        elif (M_lo > 0.30 and M_lo <= 0.45):
+            thrust_ratio = 34820*((0.30-M_lo)/(0.45-0.30)) + 31750*(1-(0.45-M_lo)/(0.45-0.40))
+        else:
+            print('error in W/T')
+            exit()
+
+        wt = wt_7vstall * thrust_ratio/45500 + adj_w
 
         #print('W/T is: ' + str(wt))
         #exit()
@@ -304,7 +334,7 @@ while (T_r_jt9d_2 > 10000):
 
         W_lg = 0.040
         W_np = 0.0555/wt
-        W_ts = Kts*W_w
+        W_ts = (Kts+0.08/3)*W_w
         W_pp = 1/(3.58*wt)
 
         W_fuel = 1.0275*wf_wto
@@ -643,7 +673,7 @@ doc_table = np.array([['Flight crew', 'Fuel and oil', 'Insurance', 'Maintenance'
 
 
 #print(str(doc*passanger/num_p) + ' per passanger mile') # per passangar mile
-#print('DOC: ' + str(doc) + ' per ton mile')
+print('DOC: ' + str(doc) + ' per ton mile')
 #print('Takeoff Weight: ' + str(w_to) + ' lbs')
 
 #print(doc_table)
@@ -689,19 +719,22 @@ doc_table = np.array([['Flight crew', 'Fuel and oil', 'Insurance', 'Maintenance'
 #print(mission_type)
 
 print(w_to)
+#print(sfc_35)
+#print(M_cruise*a)
+#print(l_d_cruise)
+#print(wf_wto)
+#print(wf_wto*w_to)
+#print(dgp.linear(M_lo, dgp.coef_JT9D)/dgp.linear(0, dgp.coef_JT9D))#*w_to + W_payload + W_fe_cts
+#print(W_payload)
+#print('Total actual range is: ' + str(R_total))
+#print('Theoretical range is: ' + str(R_allout))
 
-print(sfc_35)
-print(M_cruise*a)
-print(l_d_cruise)
-
+print(w_0)
 print(wf_wto)
+print(T_e)
+print(tc)
+print(b)
 
-
-print(wf_wto*w_to)
-
-
-print(W_payload)
-print('Total actual range is: ' + str(R_total))
 
 
 
