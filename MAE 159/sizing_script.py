@@ -32,7 +32,7 @@ if (mission_type == 1):
     class3 = 1
 
     num_abreast = 6
-    num_aisles = 1
+    num_aisles = 2
 
     ar = 7.9
     sweep = 37
@@ -718,7 +718,9 @@ print('DOC: ' + str(doc) + ' per ton mile')
 
 #print(mission_type)
 
-print(w_to)
+
+#Payload Range Requirements
+#print(w_to)
 #print(sfc_35)
 #print(M_cruise*a)
 #print(l_d_cruise)
@@ -728,14 +730,6 @@ print(w_to)
 #print(W_payload)
 #print('Total actual range is: ' + str(R_total))
 #print('Theoretical range is: ' + str(R_allout))
-
-print(w_0)
-print(wf_wto)
-print(T_e)
-print(tc)
-print(b)
-
-
 
 
 #print((w_to-w_1))
@@ -748,3 +742,32 @@ print(b)
 #np.save("", pm_array)
 #np.save("", tm_array)
 #np.save("", w_array)
+
+
+#Final Drawing Requirements
+#print(S)
+#print(b)
+#print(T_e)
+#print(num_e)
+#print(l_f)
+#print(dia_f)
+#print(w_0)
+#print(wf_wto)
+#print(wf_wto*w_to)
+#print(w_to)
+
+#print(tc)
+
+
+
+#CG CALCS
+print(W_w)
+print(W_f)
+print(W_lg)
+print(W_np)
+print(W_ts)
+print(W_pp)
+print(W_fe_cts)
+print(W_payload)
+print(W_cargo)
+print(w_to)
