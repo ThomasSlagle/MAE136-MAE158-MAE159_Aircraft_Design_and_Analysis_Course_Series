@@ -771,3 +771,5 @@ print(W_fe_cts)
 print(W_payload)
 print(W_cargo)
 print(w_to)
+
+print(dia_f)
