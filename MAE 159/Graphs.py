@@ -41,19 +41,33 @@ nonstop_pm_40_sweep = np.load('nonstop_pm_40_sweep.npy')
 fig1, (ax1, ax2) = plt.subplots(1,2, figsize = (12,9))
 fig1.subplots_adjust(bottom = 0.15)
 
-for i in range(len(array_w_ar_nonstop)):
-       ax1.scatter(ar_array, array_w_ar_nonstop[i], label=('Sweep Angle: ' + str(10+i)))
+#for i in range(len(array_w_ar_nonstop)):
+#       ax1.scatter(ar_array, array_w_ar_nonstop[i], label=('Sweep Angle: ' + str(10+i)))
+ax1.scatter(ar_array, array_w_ar_nonstop[0], label=('Sweep Angle: ' + str(10)))
+ax1.scatter(ar_array, array_w_ar_nonstop[5], label=('Sweep Angle: ' + str(15)))
+ax1.scatter(ar_array, array_w_ar_nonstop[10], label=('Sweep Angle: ' + str(20)))
+ax1.scatter(ar_array, array_w_ar_nonstop[15], label=('Sweep Angle: ' + str(25)))
+ax1.scatter(ar_array, array_w_ar_nonstop[20], label=('Sweep Angle: ' + str(30)))
+ax1.scatter(ar_array, array_w_ar_nonstop[25], label=('Sweep Angle: ' + str(35)))
+ax1.scatter(ar_array, array_w_ar_nonstop[27], label=('Sweep Angle: ' + str(37)))
 ax1.scatter(ar_array, nonstop_w_40_sweep, label='Sweep Angle: 40')
 ax1.set_xlabel('Aspect Ratio', fontsize=14)
 ax1.set_ylabel('Takeoff Weight (lbs)', fontsize=14)
 
 
-for i in range(len(array_w_ar_onestop)):
-       ax2.scatter(ar_array, array_w_ar_onestop[i], label=('Sweep Angle: ' + str(10+i)))
+#for i in range(len(array_w_ar_onestop)):
+#       ax2.scatter(ar_array, array_w_ar_onestop[i], label=('Sweep Angle: ' + str(10+i)))
+ax2.scatter(ar_array, array_w_ar_onestop[0], label=('Sweep Angle: ' + str(10)))
+ax2.scatter(ar_array, array_w_ar_onestop[5], label=('Sweep Angle: ' + str(15)))
+ax2.scatter(ar_array, array_w_ar_onestop[10], label=('Sweep Angle: ' + str(20)))
+ax2.scatter(ar_array, array_w_ar_onestop[15], label=('Sweep Angle: ' + str(25)))
+ax2.scatter(ar_array, array_w_ar_onestop[20], label=('Sweep Angle: ' + str(30)))
+ax2.scatter(ar_array, array_w_ar_onestop[25], label=('Sweep Angle: ' + str(35)))
+ax2.scatter(ar_array, array_w_ar_onestop[21], label=('Optimized Sweep Angle'))
 ax2.scatter(ar_array, onestop_w_40_sweep, label='Sweep Angle: 40')
 ax2.set_xlabel('Aspect Ratio', fontsize=14)
 
-ax2.legend(loc = 'lower center', bbox_to_anchor=(0,0,1,1),bbox_transform = plt.gcf().transFigure, ncol = 8, fontsize=6)
+ax2.legend(loc = 'lower center', bbox_to_anchor=(0,0,1,1),bbox_transform = plt.gcf().transFigure, ncol = 3, fontsize=10)
 ax1.set_title('Non-stop Aircraft', fontsize = 14)
 ax2.set_title('One-stop Aircraft', fontsize = 14)
 
@@ -71,24 +85,42 @@ colors = sns.color_palette('tab20')
 axx1.set_prop_cycle('color', colors)
 axx2.set_prop_cycle('color', colors)
 
-for i in range(len(array_doctm_ar_nonstop)):
-       axx1.plot(ar_array, array_doctm_ar_nonstop[i], label=('Sweep Angle: ' + str(10+i)),marker='.',markersize = 10)
-axx1.plot(ar_array, nonstop_tm_40_sweep, label='Sweep Angle: 40',marker='.',markersize = 10)
+#for i in range(len(array_doctm_ar_nonstop)):
+#       axx1.plot(ar_array, array_doctm_ar_nonstop[i], label=('Sweep Angle: ' + str(10+i)),marker='.',markersize = 10)
+
+axx1.scatter(ar_array, array_doctm_ar_nonstop[0], label=('Sweep Angle: ' + str(10)))
+axx1.scatter(ar_array, array_doctm_ar_nonstop[5], label=('Sweep Angle: ' + str(15)))
+axx1.scatter(ar_array, array_doctm_ar_nonstop[10], label=('Sweep Angle: ' + str(20)))
+axx1.scatter(ar_array, array_doctm_ar_nonstop[15], label=('Sweep Angle: ' + str(25)))
+axx1.scatter(ar_array, array_doctm_ar_nonstop[20], label=('Sweep Angle: ' + str(30)))
+axx1.scatter(ar_array, array_doctm_ar_nonstop[25], label=('Sweep Angle: ' + str(35)))
+axx1.scatter(ar_array, array_doctm_ar_nonstop[27], label=('Sweep Angle: ' + str(37)))
+axx1.scatter(ar_array, nonstop_tm_40_sweep, label='Sweep Angle: 40')
 axx1.set_xlabel('Aspect Ratio', fontsize=14)
 axx1.set_ylabel('DOC per Ton per Mile ($)', fontsize=14)
 
 
-for i in range(len(array_doctm_ar_onestop)):
-       axx2.plot(ar_array, array_doctm_ar_onestop[i], label=('Sweep Angle: ' + str(10+i)),marker='.',markersize = 10)
-axx2.plot(ar_array, onestop_tm_40_sweep, label='Sweep Angle: 40',marker='.',markersize = 10)
+#for i in range(len(array_doctm_ar_onestop)):
+#       axx2.plot(ar_array, array_doctm_ar_onestop[i], label=('Sweep Angle: ' + str(10+i)),marker='.',markersize = 10)
+#axx2.plot(ar_array, onestop_tm_40_sweep, label='Sweep Angle: 40',marker='.',markersize = 10)
+
+axx2.scatter(ar_array, array_doctm_ar_onestop[0], label=('Sweep Angle: ' + str(10)))
+axx2.scatter(ar_array, array_doctm_ar_onestop[5], label=('Sweep Angle: ' + str(15)))
+axx2.scatter(ar_array, array_doctm_ar_onestop[10], label=('Sweep Angle: ' + str(20)))
+axx2.scatter(ar_array, array_doctm_ar_onestop[15], label=('Sweep Angle: ' + str(25)))
+axx2.scatter(ar_array, array_doctm_ar_onestop[20], label=('Sweep Angle: ' + str(30)))
+axx2.scatter(ar_array, array_doctm_ar_onestop[25], label=('Sweep Angle: ' + str(35)))
+axx2.scatter(ar_array, array_doctm_ar_onestop[21], label=('Optimized Sweep Angle'))
+axx2.scatter(ar_array, onestop_tm_40_sweep, label='Sweep Angle: 40')
+
 axx2.set_xlabel('Aspect Ratio', fontsize=14)
 
-axx2.legend(loc = 'lower center', bbox_to_anchor=(0,0,1,1),bbox_transform = plt.gcf().transFigure, ncol = 8, fontsize=6)
+axx2.legend(loc = 'lower center', bbox_to_anchor=(0,0,1,1),bbox_transform = plt.gcf().transFigure, ncol = 3, fontsize=10)
 axx1.set_title('Non-stop Aircraft', fontsize = 14)
 axx2.set_title('One-stop Aircraft', fontsize = 14)
 
-#plt.savefig(r'MAE 159\Other data\Images\DOCTM v Sweep Angle.png')
-plt.show()
+plt.savefig(r'MAE 159\Other data\Images\DOCTM v Sweep Angle.png')
+#plt.show()
 plt.close()
 exit()
 
